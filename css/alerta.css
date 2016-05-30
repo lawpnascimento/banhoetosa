@@ -1,0 +1,19 @@
+div.modal.modal-alerta.in button {
+    position: absolute;
+
+    right: 35px;
+}
+.modal-alerta .modal-content {
+    background: transparent;
+}
+.modal-alerta .alert {
+    margin: 0;
+}
+
+.modal-dialog{
+    position:absolute;
+    top:40%;
+    left:30%;
+    margin-top:-50px;
+    margin-left:-50px;
+}
