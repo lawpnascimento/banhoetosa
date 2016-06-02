@@ -1,5 +1,8 @@
-<div class="container-fluid">    
-			
+<script type="text/javascript" src="../../scripts/alerta.js"></script>
+<script type="text/javascript" src="../../scripts/animais.js"></script>
+<link href="../../css/alerta.css" rel="stylesheet" media="screen" />
+
+<div class="container-fluid">    		
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">Cadastrar Animal</div>
@@ -9,7 +12,7 @@
                 <div class="form-group">
                     <label for="nome" class="col-md-1 control-label">Nome</label>
                     <div class="col-md-9">
-                        <input id="txbNomne" type="text" class="form-control" name="txbNome" placeholder="Nome">
+                        <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome">
                     </div>
                 </div>
                 <div class="form-group">
