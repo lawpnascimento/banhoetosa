@@ -91,7 +91,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul id="ulAnimal" class="dropdown-menu" role="menu" aria-labelledby="ddlAnimal">
-                                <li role="presentation" value="1"><a role="menuitem" tabindex="-1" href="#">Toto</a></li>
+                                
 
                             </ul>
                         </div>
@@ -135,5 +135,3 @@
         </table>
     </div>
 </div>
-
-

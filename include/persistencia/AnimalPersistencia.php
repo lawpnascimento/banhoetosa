@@ -26,12 +26,14 @@ class AgendamentoPersistencia {
 
         $this->getConexao()->conectaBanco();
 
-        $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
-        $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
-        $animal = intval($this->getModel()->getAnimal());
-        $data = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
-        $usuario = intval($this->getModel()->getUsuario());
+        $nome = $this->getModel()->
 
+
+        $nome = $this->getModel()->getNome();
+        $raca = $this->getModel()->getRaca();
+        $idade = intval($this->getModel()->getIdade());
+        /*$porte = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));*/
+  
         $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdAnimal, dtAgendamento, cdUsuario)
                           VALUES ('". $horarioDe ."'
                                 ,'". $horarioAte ."'
@@ -176,43 +178,5 @@ class AgendamentoPersistencia {
 
         $this->getConexao()->fechaConexao();
     }
-
-    public function buscaAnimaisDropDown(){
-        $this->getConexao()->conectaBanco();
-
-        $usuario = intval($this->getModel()->getUsuario());
-
-        $sSql = "SELECT ani.cdAnimal cdAnimal
-                       ,ani.dsNome dsNome
-                   FROM tbanimal ani
-                  WHERE ani.cdUsuario = " . $usuario . "
-                  ORDER BY ani.dsNome";
-
-        $resultado = mysql_query($sSql);
-
-        $qtdLinhas = mysql_num_rows($resultado);
-
-        $contador = 0;
-
-        $retorno = '[';
-        while ($linha = mysql_fetch_assoc($resultado)) {
-
-            $contador = $contador + 1;
-    
-            $retorno = $retorno . '{"cdAnimal": "'.$linha["cdAnimal"].'"
-                                   , "dsNome" : "'.$linha["dsNome"].'"}';
-            //Para não concatenar a virgula no final do json
-            if($qtdLinhas != $contador)
-               $retorno = $retorno . ',';
-
-        }
-        $retorno = $retorno . "]";
-
-        $this->getConexao()->fechaConexao();
-
-        return $retorno;
-    }
 }
-
-
 ?>

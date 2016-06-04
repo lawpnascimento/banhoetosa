@@ -72,6 +72,49 @@ function buscaAgendamentos(cdAgendamento){
 
 };
 
+function buscaAnimaisDropDown(){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "animalDropDown"
+        },
+
+        url: "../controller/AgendamentoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var animais = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + animais.cdAnimal  + '"><a role="menuitem" tabindex="-1" href="#">' + animais.dsNome + '</a></li>';
+
+            }
+            $("#ulAnimal").html(dropdown);
+
+            $("#ulAnimal li a").click(function(){
+
+                $("#ddlAnimal:first-child").text($(this).text());
+
+                $("#ulAnimal li").each(function(){
+
+                    if ($(this).text() == $("#ddlAnimal").text().trim()){
+                        $("#ddlAnimal").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+}
+
 $("#document").ready(function() {
     $("#agendamentosform #btnCadastrar").click(function () {
 
@@ -240,6 +283,7 @@ $("#document").ready(function() {
     });
 
     $("#ulPagamento li a").click(function(){
+
         $("#ddlPagamento:first-child").text($(this).text());
 
         $("#ulPagamento li").each(function(){
@@ -250,17 +294,6 @@ $("#document").ready(function() {
         });
     });
 
-    $("#ulAnimal li a").click(function(){
-        $("#ddlAnimal:first-child").text($(this).text());
-
-        $("#ulAnimal li").each(function(){
-
-            if ($(this).text() == $("#ddlAnimal").text().trim()){
-                $("#ddlAnimal").val($(this).val());
-            }
-        });
-
-    });
 
 
 });
@@ -283,5 +316,3 @@ function validaCampos(data, horarioDe, horarioAte, animal){
     return msgErro;
 
 }
-
-

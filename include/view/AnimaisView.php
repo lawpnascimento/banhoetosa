@@ -1,8 +1,8 @@
 <script type="text/javascript" src="../../scripts/alerta.js"></script>
-<script type="text/javascript" src="../../scripts/animais.js"></script>
+<script type="text/javascript" src="../../scripts/animal.js"></script>
 <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
 
-<div class="container-fluid">    		
+<div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">Cadastrar Animal</div>

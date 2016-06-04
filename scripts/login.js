@@ -1,7 +1,13 @@
 $(document).ready(function(){
 		$("#txbLogin").focus();
-	});	
-  
+	});
+
+	$("#loginform #txbSenha").keyUp(function(event){
+	    if(event.keyCode == 13){
+	        $("#btnLogin").click();
+	    }
+	});
+
 $("#loginform #btnLogin").click(function(){
     var txbLogin = $("#txbLogin").val();
     var txbSenha = $("#txbSenha").val();

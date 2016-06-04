@@ -23,6 +23,7 @@ $("#btnAgendamentos").click(function(){
         success: function(dados){
             $("#main").html(dados);
             buscaAgendamentos();
+            buscaAnimaisDropDown();
         }
     });
 });
@@ -54,4 +55,3 @@ $("#btnMudarFoto").click(function(){
         }
     });
 });
-

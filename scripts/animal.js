@@ -1,7 +1,7 @@
 $("#document").ready(function() {
     $("#animaisform #btnCadastrar").click(function () {
-		
-		var txbNome = $("#txbNome").val();
+
+		    var txbNome = $("#txbNome").val();
         var txbRaca = $("#txbRaca").val();
         var txbIdade = $("#txbIdade").val();
         var txbPorte = $("#txbPorte").val();
@@ -18,6 +18,7 @@ $("#document").ready(function() {
                     nome: txbNome,
                     raca: txbRaca,
                     idade: txbIdade,
+                    porte: txbPorte,
                     action: "cadastrar"
                 },
 
@@ -25,7 +26,7 @@ $("#document").ready(function() {
 
                 //Se der tudo ok no envio...
                 success: function (dados) {
-                    jbkrAlert.sucesso('Agendamentos', 'Animais cadastrado com sucesso!');
+                    jbkrAlert.sucesso('Animais', 'Animais cadastrado com sucesso!');
                     $("#animaisform #btnCancelar").trigger("click");
                 }
             });
@@ -44,7 +45,7 @@ function validaCampos(nome, raca, porte){
     if(porte == ""){
         msgErro = msgErro + "</br><b>Porte</b> e um campo de preenchimento obrigatorio";
     }
-    
+
     return msgErro;
 
 }

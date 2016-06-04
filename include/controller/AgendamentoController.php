@@ -90,5 +90,21 @@ switch($_POST["action"]){
 
         $oPersistencia->Excluir();
         break;
+    case 'animalDropDown':
+
+        $oModel = new AgendamentoModel();
+
+        $oPersistencia = new AgendamentoPersistencia();
+
+        $oModel->setUsuario($_SESSION["cdusuario"]);
+
+        $oPersistencia->setModel($oModel);
+
+        $retorno = $oPersistencia->buscaAnimaisDropDown();
+
+        echo $retorno;
+
+        break;
+
 }
 ?>
