@@ -1,7 +1,7 @@
 <?php
 require_once("../../estrutura/conexao.php");
 
-class AgendamentoPersistencia {
+class AnimalPersistencia {
 
     protected $conexao;
     protected $Model;
@@ -26,27 +26,58 @@ class AgendamentoPersistencia {
 
         $this->getConexao()->conectaBanco();
 
-        $nome = $this->getModel()->
-
-
         $nome = $this->getModel()->getNome();
         $raca = $this->getModel()->getRaca();
         $idade = intval($this->getModel()->getIdade());
-        /*$porte = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));*/
-  
-        $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdAnimal, dtAgendamento, cdUsuario)
-                          VALUES ('". $horarioDe ."'
-                                ,'". $horarioAte ."'
-                                , ". $animal ."
-                                , STR_TO_DATE('". $data ."','%m/%d/%Y')
-                                ,  ". $usuario .")";
+        $porte = intval($this->getModel()->getPorte());
+        $usuario = intval($this->getModel()->getUsuario());
+
+        $sSql = "INSERT INTO tbanimal (dsNome, dsRaca, nrIdade, cdPorte, cdUsuario)
+                          VALUES ('". $nome ."'
+                                ,'". $raca ."'
+                                , ". $idade ."
+                                , ". $porte."
+                                , ". $usuario .")";
 
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
     }
 
-    public function BuscaAgendamentos(){
+    public function buscaPorteDropdown(){
+        $this->getConexao()->conectaBanco();
+
+        $sSql = "SELECT prt.cdPorte cdPorte
+                       ,prt.dsPorte dsPorte
+                   FROM tbporte prt
+                  ORDER BY prt.cdPorte";
+
+        $resultado = mysql_query($sSql);
+
+        $qtdLinhas = mysql_num_rows($resultado);
+
+        $contador = 0;
+
+        $retorno = '[';
+        while ($linha = mysql_fetch_assoc($resultado)) {
+
+            $contador = $contador + 1;
+
+            $retorno = $retorno . '{"cdPorte": "'.$linha["cdPorte"].'"
+                                   , "dsPorte" : "'.$linha["dsPorte"].'"}';
+            //Para não concatenar a virgula no final do json
+            if($qtdLinhas != $contador)
+               $retorno = $retorno . ',';
+
+        }
+        $retorno = $retorno . "]";
+
+        $this->getConexao()->fechaConexao();
+
+        return $retorno;
+    }
+
+  /*  public function BuscaAgendamentos(){
         $this->getConexao()->conectaBanco();
 
         $usuario = intval($this->getModel()->getUsuario());
@@ -177,6 +208,10 @@ class AgendamentoPersistencia {
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
-    }
+    }*/
 }
+
+
+
+
 ?>

@@ -4,6 +4,7 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 date_default_timezone_set('America/Sao_Paulo');
+session_start();
 
 require_once("../model/AnimalModel.php");
 require_once("../persistencia/AnimalPersistencia.php");
@@ -38,6 +39,15 @@ switch($_POST["action"]){
 
         break;
 
+    case 'portedropdown':
+
+      $oPersistencia = new AnimalPersistencia();
+
+      $retorno = $oPersistencia->buscaPorteDropdown();
+
+      echo $retorno;
+
+      break;
 
 }
 

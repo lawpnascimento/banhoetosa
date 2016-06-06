@@ -6,14 +6,14 @@ function buscaAgendamentos(cdAgendamento){
     var txbData = $("#dtpAgendamento").val();
 
     if($("#ddlHorarioDe").text().trim() != $("#ddlHorarioDe").attr("name")){
-        var ddlHorarioDe = $("#ddlHorarioDe").text();
+        ddlHorarioDe = $("#ddlHorarioDe").text();
     }
 
     if($("#ddlHorarioAte").text().trim() != $("#ddlHorarioAte").attr("name")){
-        var ddlHorarioAte = $("#ddlHorarioAte").text();
+       ddlHorarioAte = $("#ddlHorarioAte").text();
     }
     if($("#ddlAnimal").text().trim() != $("#ddlAnimal").attr("name")){
-        var ddlAnimal = $("#ddlAnimal").val();
+        ddlAnimal = $("#ddlAnimal").val();
     }
 
     $.ajax({
@@ -79,7 +79,7 @@ function buscaAnimaisDropDown(){
         type: "POST",
         dataType: "text",
         data: {
-            action: "animalDropDown"
+            action: "animaldropdown"
         },
 
         url: "../controller/AgendamentoController.php",

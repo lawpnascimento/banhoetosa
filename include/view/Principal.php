@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php require_once("../../estrutura/iniciar_sessao.php"); ?>
+<?php session_start();
+			require_once("../../estrutura/iniciar_sessao.php");
+?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title>Banho e tosa</title>
@@ -73,7 +75,7 @@
 									<th>
 										Data Atendimento
 									</th>
-									
+
 									<th>
 										Horário
 									</th>
@@ -85,7 +87,7 @@
 									</th>
 									<th>
 										Porte
-									</th>	
+									</th>
 									<th>
 										Forma de pagamento
 									</th>
@@ -299,7 +301,7 @@
 		    </div>
 		    <footer class="row">
 				<div class="container">
-					
+
 				</div>
 		    </footer>
 		</div>

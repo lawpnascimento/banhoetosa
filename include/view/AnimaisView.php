@@ -11,28 +11,40 @@
             <form id="animaisform" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="nome" class="col-md-1 control-label">Nome</label>
-                    <div class="col-md-9">
+                    <div class="col-md-5">
                         <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="raca" class="col-md-1 control-label">Raça</label>
-                    <div class="col-md-9">
+                    <div class="col-md-5">
                         <input id="txbRaca" type="raca" class="form-control" name="txbRaca" placeholder="Raça">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idade" class="col-md-1 control-label">Idade</label>
-                    <div class="col-md-9">
+                    <div class="col-md-5">
                         <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade">
                     </div>
                 </div>
+
+
                 <div class="form-group">
                     <label for="porte" class="col-md-1 control-label">Porte</label>
-                    <div class="col-md-9">
-                        <input id="txbPorte" type="text" class="form-control" name="txbPorte" placeholder="Porte">
+                    <div class="col-md-5">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlPorte" data-toggle="dropdown" aria-expanded="true" name="Porte">
+                                Porte
+                                <span class="caret"></span>
+                            </button>
+                            <ul id="ulPorte" class="dropdown-menu" role="menu" aria-labelledby="ddlPorte">
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
+
+
                 <div class="form-group">
                     <div class="col-md-offset-1 col-md-9">
                         <button id="btnCadastrar" type="button" class="btn btn-success"><i class="icon-hand-right"></i>Cadastrar</button>
@@ -63,21 +75,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Toto
-                        </td>
-                        <td>
-                            Tomba lata
-                        </td>
-                        <td>
-                            5
-                        </td>
-                        <td>
-                            Monstro
-                        </td>
-                    </tr>
+                <tbody id="tbanimal">
+
                 </tbody>
             </table>
         </div>

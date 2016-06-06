@@ -6,17 +6,9 @@ header("Pragma: no-cache");
 date_default_timezone_set('America/Sao_Paulo');
 require_once("../model/AgendamentoModel.php");
 require_once("../persistencia/AgendamentoPersistencia.php");
+session_start();
 
 require_once("../../estrutura/iniciar_sessao.php");
-
-/*if($_POST["horarioDe"] == '' OR
-    $_POST["horarioAte"] == '' OR
-    $_POST["animal"] == '' OR
-    $_POST["data"] == '' OR
-    $_POST["sobrenome"] == '' OR
-    $_POST["cpf"] == '' ){
-    exit;
-}*/
 
 switch($_POST["action"]){
 
@@ -90,7 +82,7 @@ switch($_POST["action"]){
 
         $oPersistencia->Excluir();
         break;
-    case 'animalDropDown':
+    case 'animaldropdown':
 
         $oModel = new AgendamentoModel();
 

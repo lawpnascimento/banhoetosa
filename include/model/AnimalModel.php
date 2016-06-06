@@ -7,6 +7,7 @@ class AnimalModel {
     private $raca;
     private $idade;
     private $porte;
+    private $usuario;
 
 
     public function setCodigo($codigo){
@@ -44,4 +45,13 @@ class AnimalModel {
     public function getPorte(){
         return $this->porte;
     }
+
+    public function setUsuario($usuario){
+        $this->usuario = $usuario;
+    }
+    public function getUsuario(){
+        return $this->usuario;
+    }
+
+}
 ?>

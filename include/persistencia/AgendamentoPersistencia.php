@@ -198,7 +198,7 @@ class AgendamentoPersistencia {
         while ($linha = mysql_fetch_assoc($resultado)) {
 
             $contador = $contador + 1;
-    
+
             $retorno = $retorno . '{"cdAnimal": "'.$linha["cdAnimal"].'"
                                    , "dsNome" : "'.$linha["dsNome"].'"}';
             //Para não concatenar a virgula no final do json
