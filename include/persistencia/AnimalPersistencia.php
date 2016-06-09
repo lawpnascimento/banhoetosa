@@ -77,67 +77,61 @@ class AnimalPersistencia {
         return $retorno;
     }
 
-  /*  public function BuscaAgendamentos(){
+    public function BuscaAnimais(){
         $this->getConexao()->conectaBanco();
 
         $usuario = intval($this->getModel()->getUsuario());
         $codigo = intval($this->getModel()->getCodigo());
-        $data = $this->getModel()->getData();
-        $horarioDe = $this->getModel()->getHorarioDe() ;
-        $horarioAte = $this->getModel()->getHorarioAte();
-        $animal = $this->getModel()->getAnimal();
+        $nome = $this->getModel()->getNome();
+        $raca = $this->getModel()->getRaca() ;
+        $idade = $this->getModel()->getIdade();
+        $porte = $this->getModel()->getPorte();
 
         if($codigo == null){
-            $sSql = "SELECT age.cdAgendamento cdAgendamento
-                           ,age.hrInicial hrInicial
-                           ,age.hrFinal hrFinal
-                           ,age.dtAgendamento dtAgendamento
-                           ,age.cdUsuario cdUsuario
-                           ,usu.dsNome nmUsuario
-                           ,ani.dsNome nmAnimal
-                           ,ani.cdAnimal cdAnimal
-                       FROM tbagendamento age
-                       JOIN tbusuario usu
-                         ON usu.cdUsuario = age.cdUsuario
-                       JOIN tbanimal ani
-                         ON ani.cdAnimal = age.cdAnimal
-                      WHERE age.cdUsuario = " .$usuario;
+            $sSql = "SELECT ani.cdAnimal
+                        	 ,ani.dsNome
+                       		 ,ani.dsRaca
+                      		 ,ani.cdPorte
+                      		 ,ani.cdUsuario
+                           ,ani.nrIdade
+                           ,prt.dsPorte
+                       FROM tbanimal ani
+                       JOIN tbporte prt
+                         ON prt.cdPorte = ani.cdPorte
+                      WHERE ani.cdUsuario = " .$usuario;
 
-            if($data != null){
-                $sSql = $sSql . " AND age.dtAgendamento = STR_TO_DATE('". date("m/d/y",strtotime(str_replace('/','-',$data))) ."','%m/%d/%Y')";
+            if($nome != null){
+                $sSql = $sSql . " AND UPPER(ani.dsNome) LIKE UPPER('%" . $nome ."%')";
             }
 
-            if($horarioDe != null){
-                $sSql = $sSql . " AND age.hrInicial >= '". date("h:i", strtotime($horarioDe)) ."'";
+            if($raca != null){
+                $sSql = $sSql . " AND UPPER(ani.dsRaca) LIKE UPPER('%" . $raca ."%')";
             }
 
-            if($horarioAte != null){
-                $sSql = $sSql . " AND age.hrFinal <= '". date("h:i", strtotime($horarioAte)) ."'";
+            if($idade != null){
+                $sSql = $sSql . " AND ani.nrIdade = ". intval($idade);
             }
 
-            if($animal != null){
-                $sSql = $sSql . " AND age.cdAnimal = ". intval($animal) ."";
+            if($porte != null){
+                $sSql = $sSql . " AND ani.cdPorte = ". intval($porte);
             }
 
-            $sSql = $sSql . " ORDER BY age.cdAgendamento";
+            $sSql = $sSql . " ORDER BY ani.cdAnimal";
         }
         else{
-            $sSql = "SELECT age.cdAgendamento cdAgendamento
-                           ,age.hrInicial hrInicial
-                           ,age.hrFinal hrFinal
-                           ,age.dtAgendamento dtAgendamento
-                           ,age.cdUsuario cdUsuario
-                           ,usu.dsNome nmUsuario
-                           ,ani.dsNome nmAnimal
-                           ,ani.cdAnimal cdAnimal
-                       FROM tbagendamento age
-                       JOIN tbusuario usu
-                         ON usu.cdUsuario = age.cdUsuario
-                       JOIN tbanimal ani
-                         ON ani.cdAnimal = age.cdAnimal
-                      WHERE age.cdUsuario = " .$usuario."
-                        AND age.cdAgendamento = " . $codigo."
-                        ORDER BY cdAgendamento";
+            $sSql = "SELECT ani.cdAnimal
+                        	 ,ani.dsNome
+                       		 ,ani.dsRaca
+                      		 ,ani.cdPorte
+                      		 ,ani.cdUsuario
+                           ,ani.nrIdade
+                           ,prt.dsPorte
+                       FROM tbanimal ani
+                       JOIN tbporte prt
+                         ON prt.cdPorte = ani.cdPorte
+                      WHERE ani.cdUsuario = " .$usuario. "
+                        AND ani.cdAnimal = " . $codigo."
+                      ORDER BY ani.cdAnimal";
         }
 
         $resultado = mysql_query($sSql);
@@ -151,12 +145,13 @@ class AnimalPersistencia {
 
             $contador = $contador + 1;
 
-            $retorno = $retorno . '{"dtAgendamento": "'.$linha["dtAgendamento"].'"
-                                   , "hrInicial" : "'.$linha["hrInicial"].'"
-                                   , "hrFinal" : "'.$linha["hrFinal"].'"
-                                   , "nmAnimal" : "'.$linha["nmAnimal"].'"
-                                   , "cdAgendamento" : "'.$linha["cdAgendamento"].'"
-                                   , "cdAnimal" : "'.$linha["cdAnimal"].'"}';
+            $retorno = $retorno . '{"cdAnimal": "'.$linha["cdAnimal"].'"
+                                   , "dsNome" : "'.$linha["dsNome"].'"
+                                   , "dsRaca" : "'.$linha["dsRaca"].'"
+                                   , "cdPorte" : "'.$linha["cdPorte"].'"
+                                   , "dsPorte" : "'.$linha["dsPorte"].'"
+                                   , "cdUsuario" : "'.$linha["cdUsuario"].'"
+                                   , "nrIdade" : "'.$linha["nrIdade"].'"}';
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
                 $retorno = $retorno . ',';
@@ -168,9 +163,8 @@ class AnimalPersistencia {
 
         return $retorno;
 
-
     }
-
+/*
     public function Atualizar(){
         $this->getConexao()->conectaBanco();
 

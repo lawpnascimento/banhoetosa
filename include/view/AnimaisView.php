@@ -47,8 +47,11 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-1 col-md-9">
-                        <button id="btnCadastrar" type="button" class="btn btn-success"><i class="icon-hand-right"></i>Cadastrar</button>
-                        <button id="btnBuscar" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Buscar</button>
+                      <button id="btnCadastrar" type="button" class="btn btn-success"><i class="icon-hand-right"></i>Cadastrar</button>
+                      <button id="btnBuscar" type="button" class="btn btn-info"><i class="icon-hand-right"></i>Buscar</button>
+                      <button id="btnAtualizar" type="button" style="display:none; "class="btn btn-primary">Atualizar</button>
+                      <button id="btnExcluir" type="button" style="display:none; "class="btn btn-danger">Excluir</button>
+                      <button id="btnCancelar" type="button" class="btn btn-warning">Cancelar</button>
                     </div>
                 </div>
             </form>
@@ -72,6 +75,9 @@
                         </th>
                         <th>
                             Porte
+                        </th>
+                        <th>
+                            Editar
                         </th>
                     </tr>
                 </thead>

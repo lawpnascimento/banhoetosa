@@ -8,7 +8,9 @@ $("#btnAnimais").click(function(){
 
         success: function(dados){
             $("#main").html(dados);
+            buscaAnimais();
             buscaPorteDropdown();
+            buscaAnimais();
         }
     });
 });

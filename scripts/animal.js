@@ -26,13 +26,20 @@ $("#document").ready(function() {
 
                 //Se der tudo ok no envio...
                 success: function (dados) {
-                  alert(dados);
                     jbkrAlert.sucesso('Animais', 'Animais cadastrado com sucesso!');
                     $("#animaisform #btnCancelar").trigger("click");
                 }
             });
         }
+
+
 	});
+
+  $("#animaisform #btnBuscar").click(function () {
+    buscaAnimais();
+
+  });
+
 });
 
 function buscaPorteDropdown(){
@@ -94,13 +101,16 @@ function validaCampos(nome, raca, porte){
 
 }
 
-function buscaAgendamentos(cdAnimal){
-    var txbNome = $('#txbNome').text();
-    var txbRaca =  $('#txbRaca').text();
-    var txbIdade =  $('#txbIdade').text();
+function buscaAnimais(cdAnimal){
+    var txbNome = $('#txbNome').val();
+    var txbRaca =  $('#txbRaca').val();
+    var txbIdade =  $('#txbIdade').val();
 
     if($("#ddlPorte").text().trim() != $("#ddlPorte").attr("name")){
         ddlPorte = $("#ddlPorte").val();
+    }
+    else {
+      ddlPorte = "";
     }
 
     $.ajax({
@@ -120,37 +130,39 @@ function buscaAgendamentos(cdAnimal){
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
 
+            var json = $.parseJSON(dados);
+            var animal = null;
             //Carregando a grid
             if(cdAnimal == null){
 
                 var grid = "";
                 for (var i = 0; i < json.length; i++) {
-                    var animal = json[i];
+                    animal = json[i];
 
                     grid = grid + "<tr>";
-                    grid = grid + "<td>" + animal.nome + "</td>";
-                    grid = grid + "<td>" + animal.raca + "</td>";
-                    grid = grid + "<td>" + animal.idade + "</td>";
-                    grid = grid + "<td>" + animal.porte + "</td>";
-                    grid = grid + "<td href='javascript:void(0);' onClick='buscaAgendamentos(" + animal.cdAnimal + ")'><a>Editar</a></td>";
+                    grid = grid + "<td>" + animal.dsNome + "</td>";
+                    grid = grid + "<td>" + animal.dsRaca + "</td>";
+                    grid = grid + "<td>" + animal.nrIdade + "</td>";
+                    grid = grid + "<td>" + animal.dsPorte + "</td>";
+                    grid = grid + "<td href='javascript:void(0);' onClick='buscaAnimais(" + animal.cdAnimal + ")'><a>Editar</a></td>";
                     grid = grid + "</tr>";
                 }
-                $("#tbdUsuarioAgendamento").html(grid);
+                $("#tbanimal").html(grid);
             }
             //Carregando valor para atualizar
             else
             {
                 formularioModoAtualizar();
                 for (var i = 0; i < json.length; i++) {
-                    var agendamento = json[i];
+                    animal = json[i];
 
-                    $("#dtpAgendamento").val(agendamento.dtAgendamento);
-                    $("#ddlHorarioDe:first-child").text(agendamento.hrInicial);
-                    $("#ddlHorarioAte:first-child").text(agendamento.hrFinal);
-                    $("#ddlAnimal:first-child").text(agendamento.nmAnimal);
-                    $("#ddlAnimal:first-child").val(agendamento.cdAnimal);
+                    $("#txbNome").val(animal.dsNome);
+                    $("#txbRaca").val(animal.dsRaca);
+                    $("#txbIdade").val(animal.nrIdade);
+
+                    $("#ddlPorte:first-child").text(animal.dsPorte);
+                    $("#ddlPorte:first-child").val(animal.cdPorte);
                     $("#hdfcdAgendamento").val(agendamento.cdAgendamento);
                 }
             }
