@@ -164,30 +164,29 @@ class AnimalPersistencia {
         return $retorno;
 
     }
-/*
+
     public function Atualizar(){
         $this->getConexao()->conectaBanco();
 
-        $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
-        $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
-        $animal = intval($this->getModel()->getAnimal());
-        $data = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
+        $nome = $this->getModel()->getNome();
+        $raca = $this->getModel()->getRaca();
+        $idade = intval($this->getModel()->getIdade());
+        $porte = intval($this->getModel()->getPorte());
         $usuario = intval($this->getModel()->getUsuario());
         $codigo = intval($this->getModel()->getCodigo());
 
-        $sSql = "UPDATE tbagendamento age
-                    SET age.cdAnimal = " . $animal ."
-                       ,age.hrInicial = '" . $horarioDe ."'
-                       ,age.hrFinal = '" . $horarioAte ."'
-                       ,age.dtAgendamento = STR_TO_DATE('". $data ."','%m/%d/%Y')
-                  WHERE age.cdAgendamento = " . $codigo ."
-                    AND age.cdUsuario = " . $usuario;
+        $sSql = "UPDATE tbanimal ani
+                	  SET ani.dsNome = '" . $nome ."'
+                	     ,ani.dsRaca = '" . $raca ."'
+                	     ,ani.nrIdade = " . $idade ."
+                	     ,ani.cdPorte = " . $porte ."
+                	WHERE ani.cdAnimal = " . $codigo;
 
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
     }
-
+/*
     public function Excluir(){
         $this->getConexao()->conectaBanco();
 

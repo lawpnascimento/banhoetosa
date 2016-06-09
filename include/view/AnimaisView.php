@@ -9,22 +9,23 @@
         </div>
         <div class="panel-body" >
             <form id="animaisform" class="form-horizontal" role="form">
+                <input type="hidden" id="hdfcdAnimal">
                 <div class="form-group">
                     <label for="nome" class="col-md-1 control-label">Nome</label>
                     <div class="col-md-5">
-                        <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome">
+                        <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="raca" class="col-md-1 control-label">Raça</label>
                     <div class="col-md-5">
-                        <input id="txbRaca" type="raca" class="form-control" name="txbRaca" placeholder="Raça">
+                        <input id="txbRaca" type="text" class="form-control" name="txbRaca" placeholder="Raça"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idade" class="col-md-1 control-label">Idade</label>
                     <div class="col-md-5">
-                        <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade">
+                        <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade"></input>
                     </div>
                 </div>
 

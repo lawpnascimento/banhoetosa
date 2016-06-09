@@ -294,8 +294,6 @@ $("#document").ready(function() {
         });
     });
 
-
-
 });
 
 function validaCampos(data, horarioDe, horarioAte, animal){

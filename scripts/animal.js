@@ -1,7 +1,7 @@
 $("#document").ready(function() {
     $("#animaisform #btnCadastrar").click(function () {
 
-		    var txbNome = $("#txbNome").val();
+	      var txbNome = $("#txbNome").val();
         var txbRaca = $("#txbRaca").val();
         var txbIdade = $("#txbIdade").val();
         var ddlPorte = $("#ddlPorte").val();
@@ -31,15 +31,54 @@ $("#document").ready(function() {
                 }
             });
         }
+    });
 
+    $("#animaisform #btnBuscar").click(function () {
+      buscaAnimais();
 
-	});
+    });
 
-  $("#animaisform #btnBuscar").click(function () {
-    buscaAnimais();
+    $("#animaisform #btnCancelar").click(function(){
+        limpaCampos($(this).closest("form"));
+        formularioModoInserir();
+        buscaAnimais();
+    });
 
-  });
+    $("#animaisform #btnAtualizar").click(function () {
 
+        var txbNome = $("#txbNome").val();
+        var txbRaca = $("#txbRaca").val();
+        var txbIdade = $("#txbIdade").val();
+        var ddlPorte = $("#ddlPorte").val();
+        var cdAnimal = $("#hdfcdAnimal").val();
+
+        if(validaCampos(txbNome, txbRaca, ddlPorte) != ""){
+            jbkrAlert.alerta('Alerta!',msgErro);
+        }
+        else{
+            $.ajax({
+                //Tipo de envio POST ou GET
+                type: "POST",
+                dataType: "text",
+                data: {
+                    nome: txbNome,
+                    raca: txbRaca,
+                    idade: txbIdade,
+                    porte: ddlPorte,
+                    animal: cdAnimal,
+                    action: "atualizar"
+                },
+
+                url: "../controller/AnimalController.php",
+
+                //Se der tudo ok no envio...
+                success: function (dados) {
+                    jbkrAlert.sucesso('Animais', 'Animal atualizado com sucesso!');
+                    $("#animaisform #btnCancelar").trigger("click");
+                }
+            });
+        }
+    });
 });
 
 function buscaPorteDropdown(){
@@ -163,7 +202,7 @@ function buscaAnimais(cdAnimal){
 
                     $("#ddlPorte:first-child").text(animal.dsPorte);
                     $("#ddlPorte:first-child").val(animal.cdPorte);
-                    $("#hdfcdAgendamento").val(agendamento.cdAgendamento);
+                    $("#hdfcdAnimal").val(animal.cdAnimal);
                 }
             }
         }
