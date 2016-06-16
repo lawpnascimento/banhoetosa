@@ -58,3 +58,19 @@ $("#btnMudarFoto").click(function(){
         }
     });
 });
+$("#btnAvaliacao").click(function(){
+    $.ajax({
+        type: "POST",
+        dataType: "text",
+
+        url: "AvaliacaoView.php",
+
+        success: function(dados){
+            $("#main").html(dados);
+            buscaAgendamentos();
+        }
+  });
+
+
+
+});

@@ -44,6 +44,39 @@ $("#document").ready(function() {
         buscaAnimais();
     });
 
+    $("#animaisform #btnExcluir").click(function () {
+
+        alert(validaExclusao());
+        return;
+        if (validaExclusao()){
+            var cdAnimal = $("#hdfcdAnimal").val();
+
+            $.ajax({
+                //Tipo de envio POST ou GET
+                type: "POST",
+                dataType: "text",
+                data: {
+                    codigo: cdAnimal,
+                    action: "excluir"
+                },
+
+                url: "../controller/AnimalController.php",
+
+                //Se der tudo ok no envio...
+                success: function (dados) {
+                    jbkrAlert.sucesso('Animais', 'Animal excluído com sucesso!');
+                    $("#animaisform #btnCancelar").trigger("click");
+                }
+            });
+        }
+        else {
+          jbkrAlert.sucesso('Animais', 'Não é possível excluir este animal pois está vinculado a um agendamento!');
+          $("#animaisform #btnCancelar").trigger("click");
+
+        }
+
+    });
+
     $("#animaisform #btnAtualizar").click(function () {
 
         var txbNome = $("#txbNome").val();
@@ -65,7 +98,7 @@ $("#document").ready(function() {
                     raca: txbRaca,
                     idade: txbIdade,
                     porte: ddlPorte,
-                    animal: cdAnimal,
+                    codigo: cdAnimal,
                     action: "atualizar"
                 },
 
@@ -209,3 +242,36 @@ function buscaAnimais(cdAnimal){
     });
 
 };
+
+function validaExclusao(){
+    var cdAnimal = $("#hdfcdAnimal").val();
+
+    var retorno = "";
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: cdAnimal,
+            action: "validaexclusao"
+        },
+
+        url: "../controller/AnimalController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+
+            var json = $.parseJSON(dados);
+            var retornoJson = json[0];
+            retorno = retornoJson.idExclusao;
+        }
+
+    });
+    
+    if (retornoJson.idExclusao == "N")
+      return true;
+    else
+      return false;
+
+
+}

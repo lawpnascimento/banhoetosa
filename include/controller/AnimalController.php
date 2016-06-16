@@ -60,7 +60,7 @@ switch($_POST["action"]){
         $oModel->setIdade($_POST["idade"]);
         $oModel->setPorte($_POST["porte"]);
         $oModel->setUsuario($_SESSION["cdusuario"]);
-        $oModel->setCodigo($_POST["animal"]);
+        $oModel->setCodigo($_POST["codigo"]);
 
         $oPersistencia->setModel($oModel);
 
@@ -69,18 +69,44 @@ switch($_POST["action"]){
         break;
 
     case 'excluir':
+        $oModel = new AnimalModel();
 
+        $oPersistencia = new AnimalPersistencia();
+
+        $oModel->setUsuario($_SESSION["cdusuario"]);
+        $oModel->setCodigo($_POST["codigo"]);
+
+        $oPersistencia->setModel($oModel);
+
+        $oPersistencia->Excluir();
         break;
 
     case 'portedropdown':
 
-      $oPersistencia = new AnimalPersistencia();
+        $oPersistencia = new AnimalPersistencia();
 
-      $retorno = $oPersistencia->buscaPorteDropdown();
+        $retorno = $oPersistencia->buscaPorteDropdown();
 
-      echo $retorno;
+        echo $retorno;
 
-      break;
+        break;
+
+    case 'validaexclusao':
+
+        $oModel = new AnimalModel();
+
+        $oPersistencia = new AnimalPersistencia();
+
+        $oModel->setUsuario($_SESSION["cdusuario"]);
+        $oModel->setCodigo($_POST["codigo"]);
+
+        $oPersistencia->setModel($oModel);
+
+        $retorno = $oPersistencia->ValidaExclusao();
+
+        echo $retorno;
+
+        break;
 
 }
 

@@ -50,7 +50,7 @@ switch($_POST["action"]){
 
         echo $retorno;
 
-    break;
+        break;
 
     case 'atualizar':
         $oModel = new AgendamentoModel();
@@ -82,6 +82,7 @@ switch($_POST["action"]){
 
         $oPersistencia->Excluir();
         break;
+
     case 'animaldropdown':
 
         $oModel = new AgendamentoModel();

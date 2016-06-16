@@ -186,7 +186,7 @@ class AnimalPersistencia {
 
         $this->getConexao()->fechaConexao();
     }
-/*
+
     public function Excluir(){
         $this->getConexao()->conectaBanco();
 
@@ -194,14 +194,54 @@ class AnimalPersistencia {
         $codigo = intval($this->getModel()->getCodigo());
 
         $sSql = "DELETE
-                   FROM tbagendamento
-                  WHERE cdAgendamento = " . $codigo ."
+                   FROM tbanimal
+                  WHERE cdanimal = " . $codigo ."
                     AND cdUsuario = " . $usuario;
 
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
-    }*/
+    }
+
+    public function ValidaExclusao(){
+        $this->getConexao()->conectaBanco();
+
+        $usuario = intval($this->getModel()->getUsuario());
+        $codigo = intval($this->getModel()->getCodigo());
+
+        $sSql = "SELECT 'S' idExclusao
+                   FROM tbagendamento age
+                  WHERE age.cdAnimal = " . $codigo ."
+                    AND age.cdUsuario = " . $usuario;
+
+        $resultado = mysql_query($sSql);
+
+        $qtdLinhas = mysql_num_rows($resultado);
+
+        $contador = 0;
+
+        $retorno = '[';
+        while ($linha = mysql_fetch_assoc($resultado)) {
+
+            $contador = $contador + 1;
+
+            $retorno = $retorno . '{"idExclusao": "'.$linha["idExclusao"].'"}';
+            //Para não concatenar a virgula no final do json
+            if($qtdLinhas != $contador)
+                $retorno = $retorno . ',';
+
+        }
+        $retorno = $retorno . "]";
+
+        //Não retornou nada so select
+        if ($contador == 0)
+            $retorno = '[{"idExclusao": "N"}]';
+
+        $this->getConexao()->fechaConexao();
+
+        return $retorno;
+
+    }
 }
 
 

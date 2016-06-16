@@ -41,6 +41,11 @@
 									<a id="btnAgendamentos" href="#">Agendamentos</a>
 								</li>
 							</ul>
+							<ul class="nav navbar-nav">
+								<li>
+									<a id="btnAvaliacao" href="#">Avaliações</a>
+								</li>
+							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $_SESSION["nome"] ?><span class="caret"></span></a>
