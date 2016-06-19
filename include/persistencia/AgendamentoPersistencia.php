@@ -32,11 +32,12 @@ class AgendamentoPersistencia {
         $data = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
         $usuario = intval($this->getModel()->getUsuario());
 
-        $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdAnimal, dtAgendamento, cdUsuario)
+        $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdAnimal, dtAgendamento, cdSituacao, cdUsuario)
                           VALUES ('". $horarioDe ."'
                                 ,'". $horarioAte ."'
                                 , ". $animal ."
                                 , STR_TO_DATE('". $data ."','%m/%d/%Y')
+                                , 1
                                 ,  ". $usuario .")";
 
         $this->getConexao()->query($sSql);
@@ -63,11 +64,15 @@ class AgendamentoPersistencia {
                            ,usu.dsNome nmUsuario
                            ,ani.dsNome nmAnimal
                            ,ani.cdAnimal cdAnimal
+                           ,sit.cdSituacao cdSituacao
+                           ,sit.dsSituacao dsSituacao
                        FROM tbagendamento age
                        JOIN tbusuario usu
                          ON usu.cdUsuario = age.cdUsuario
                        JOIN tbanimal ani
                          ON ani.cdAnimal = age.cdAnimal
+                       JOIN tbsituacao sit
+                         ON sit.cdSituacao = age.cdSituacao
                       WHERE age.cdUsuario = " .$usuario;
 
             if($data != null){
@@ -97,11 +102,15 @@ class AgendamentoPersistencia {
                            ,usu.dsNome nmUsuario
                            ,ani.dsNome nmAnimal
                            ,ani.cdAnimal cdAnimal
+                           ,sit.cdSituacao cdSituacao
+                           ,sit.dsSituacao dsSituacao
                        FROM tbagendamento age
                        JOIN tbusuario usu
                          ON usu.cdUsuario = age.cdUsuario
                        JOIN tbanimal ani
                          ON ani.cdAnimal = age.cdAnimal
+                       JOIN tbsituacao sit
+                         ON sit.cdSituacao = age.cdSituacao
                       WHERE age.cdUsuario = " .$usuario."
                         AND age.cdAgendamento = " . $codigo."
                         ORDER BY cdAgendamento";
@@ -123,6 +132,8 @@ class AgendamentoPersistencia {
                                    , "hrFinal" : "'.$linha["hrFinal"].'"
                                    , "nmAnimal" : "'.$linha["nmAnimal"].'"
                                    , "cdAgendamento" : "'.$linha["cdAgendamento"].'"
+                                   , "dsSituacao" : "'.$linha["dsSituacao"].'"
+                                   , "cdSituacao" : "'.$linha["cdSituacao"].'"
                                    , "cdAnimal" : "'.$linha["cdAnimal"].'"}';
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)

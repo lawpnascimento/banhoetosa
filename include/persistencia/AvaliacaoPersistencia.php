@@ -22,7 +22,7 @@ class AvaliacaoPersistencia {
       return $this->conexao;
   }
 
-    public function BuscaAgendamentos(){
+  public function BuscaAgendamentos(){
         $this->getConexao()->conectaBanco();
 
         $usuario = intval($this->getModel()->getUsuario());
@@ -32,7 +32,7 @@ class AvaliacaoPersistencia {
                        ,age.hrFinal hrFinal
                        ,age.dtAgendamento dtAgendamento
                        ,age.cdUsuario cdUsuario
-                       ,usu.dsNome nmUsuario
+                       ,concat(usu.cdUsuario, ' - ' , usu.dsNome) nmUsuario
                        ,ani.dsNome nmAnimal
                        ,ani.cdAnimal cdAnimal
                    FROM tbagendamento age
@@ -41,6 +41,7 @@ class AvaliacaoPersistencia {
                    JOIN tbanimal ani
                      ON ani.cdAnimal = age.cdAnimal
                   WHERE age.cdUsuario = " .$usuario."
+                    AND age.cdSituacao = 1
                     ORDER BY cdAgendamento";
 
         $resultado = mysql_query($sSql);
@@ -59,6 +60,7 @@ class AvaliacaoPersistencia {
                                    , "hrFinal" : "'.$linha["hrFinal"].'"
                                    , "nmAnimal" : "'.$linha["nmAnimal"].'"
                                    , "cdAgendamento" : "'.$linha["cdAgendamento"].'"
+                                   , "nmUsuario" : "'.$linha["nmUsuario"].'"
                                    , "cdAnimal" : "'.$linha["cdAnimal"].'"}';
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
@@ -71,6 +73,38 @@ class AvaliacaoPersistencia {
 
         return $retorno;
     }
+
+  public function AprovarAgendamento(){
+      $this->getConexao()->conectaBanco();
+
+      $usuario = intval($this->getModel()->getUsuario());
+      $agendamento = intval($this->getModel()->getAgendamento());
+
+      $sSql = "UPDATE tbagendamento age
+                  SET age.cdSituacao = 3
+                WHERE age.cdAgendamento = " . $agendamento ."
+                  AND age.cdUsuario = " . $usuario;
+
+      $this->getConexao()->query($sSql);
+
+      $this->getConexao()->fechaConexao();
+  }
+
+  public function ReprovarAgendamento(){
+      $this->getConexao()->conectaBanco();
+
+      $usuario = intval($this->getModel()->getUsuario());
+      $agendamento = intval($this->getModel()->getAgendamento());
+
+      $sSql = "UPDATE tbagendamento age
+                  SET age.cdSituacao = 2
+                WHERE age.cdAgendamento = " . $agendamento ."
+                  AND age.cdUsuario = " . $usuario;
+
+      $this->getConexao()->query($sSql);
+
+      $this->getConexao()->fechaConexao();
+  }
 
 }
 

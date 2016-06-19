@@ -125,6 +125,9 @@
                     <th>
                         Animal
                     </th>
+                    <th>
+                        Situação
+                    </th>
                     <th></th>
                 </tr>
 

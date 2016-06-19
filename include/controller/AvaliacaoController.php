@@ -28,5 +28,24 @@ switch($_POST["action"]){
 
         break;
 
+    case 'aprovaragendamento':
+        $oModel = new AvaliacaoModel();
+        $oPersistencia = new AvaliacaoPersistencia();
+        $oModel->setUsuario($_SESSION["cdusuario"]);
+        $oModel->setAgendamento($_POST["agendamento"]);
+        $oPersistencia->setModel($oModel);
+        $oPersistencia->AprovarAgendamento();
+        break;
+
+    case 'reprovaragendamento':
+        $oModel = new AvaliacaoModel();
+        $oPersistencia = new AvaliacaoPersistencia();
+        $oModel->setUsuario($_SESSION["cdusuario"]);
+        $oModel->setAgendamento($_POST["agendamento"]);
+        $oPersistencia->setModel($oModel);
+        $oPersistencia->ReprovarAgendamento();
+        break;
+
+
 }
 ?>

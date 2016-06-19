@@ -5,33 +5,34 @@
 <div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="panel-title">Avaliações de Agendamentos</div>
+            <div class="panel-title">Clientes</div>
         </div>
         <div class="panel-body" >
-            <div id="grdAvaliacaoAgendamento" class="panel panel-default">
+            <div id="grdClientes" class="panel panel-default">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>
-                                Data
+                                Codigo
                             </th>
                             <th>
-                                Hr. Inicial
+                                Nome
                             </th>
                             <th>
-                                Hr. Final
+                                E-Mail
                             </th>
                             <th>
-                                Usuário
+                                CPF
                             </th>
                             <th>
-                                Animal
+                                Telefone
                             </th>
-                            <th></th>
-                            <th></th>
+                            <th>
+                                Perfil
+                            </th>
                         </tr>
                     </thead>
-                    <tbody id="tbAvaliacaoAgendamento">
+                    <tbody id="tbCliente">
 
                     </tbody>
                 </table>

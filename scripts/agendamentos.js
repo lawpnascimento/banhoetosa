@@ -47,6 +47,7 @@ function buscaAgendamentos(cdAgendamento){
                     grid = grid + "<td>" + agendamento.hrInicial + "</td>";
                     grid = grid + "<td>" + agendamento.hrFinal + "</td>";
                     grid = grid + "<td>" + agendamento.nmAnimal + "</td>";
+                    grid = grid + "<td>" + agendamento.dsSituacao + "</td>";
                     grid = grid + "<td href='javascript:void(0);' onClick='buscaAgendamentos(" + agendamento.cdAgendamento + ")'><a>Editar</a></td>";
                     grid = grid + "</tr>";
                 }

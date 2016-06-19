@@ -46,18 +46,20 @@
 									<a id="btnAvaliacao" href="#">Avaliações</a>
 								</li>
 							</ul>
+							<ul class="nav navbar-nav">
+								<li>
+									<a id="btnCliente" href="#">Clientes</a>
+								</li>
+							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo $_SESSION["nome"] ?><span class="caret"></span></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nome"]) ?><span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
                                         <li>
                                             <a id="btnPerfil" href="#">Perfil</a>
                                         </li>
-                                        <li>
-                                            <a id="btnMudarFoto" href="#">Mudar Foto</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Mudar Senha</a>
+																				<li>
+                                            <a id="btnAjuda" href="#">Ajuda</a>
                                         </li>
                                         <li class="divider"/>
                                         <li>
