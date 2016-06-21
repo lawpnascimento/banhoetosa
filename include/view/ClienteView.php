@@ -1,5 +1,5 @@
 <script type="text/javascript" src="../../scripts/alerta.js"></script>
-<script type="text/javascript" src="../../scripts/avaliacao.js"></script>
+<script type="text/javascript" src="../../scripts/cliente.js"></script>
 <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
 
 <div class="container-fluid">

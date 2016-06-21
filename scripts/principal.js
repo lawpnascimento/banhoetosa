@@ -97,6 +97,7 @@ $("#btnCliente").click(function(){
 
         success: function(dados){
             $("#main").html(dados);
+            buscaClientes();
         }
   });
 
