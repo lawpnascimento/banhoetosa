@@ -31,6 +31,7 @@ class PerfilPersistencia {
                        ,usu.nrCpf
                        ,usu.dsNome
                        ,usu.dsSobrenome
+                       ,usu.nrTelefone
                    FROM tbusuario usu
                   WHERE usu.cdUsuario =" . $usuario;
 
@@ -52,6 +53,7 @@ class PerfilPersistencia {
             $retorno = $retorno . '{"dsEmail": "'.$linha["dsEmail"].'"
                                    , "nrCpf" : "'.$linha["nrCpf"].'"
                                    , "dsNome" : "'.$linha["dsNome"].'"
+                                   , "nrTelefone" : "'.$linha["nrTelefone"].'"
                                    , "dsSobrenome" : "'.$linha["dsSobrenome"].'"}';
 
             //Para não concatenar a virgula no final do json
@@ -74,12 +76,14 @@ class PerfilPersistencia {
         $sobrenome = $this->getModel()->getSobrenome();
         $email = $this->getModel()->getEmail();
         $cpf = $this->getModel()->getCpf();
+        $telefone = $this->getModel()->getTelefone();
 
         $sSql = "UPDATE tbusuario usu
                     SET usu.dsEmail = '" . $email ."'
                        ,usu.nrCpf = '" . $cpf ."'
                        ,usu.dsNome = '" . $nome ."'
                        ,usu.dsSobrenome = '". $sobrenome ."'
+                       ,usu.nrTelefone = '". $telefone ."'
                   WHERE usu.cdUsuario = " . $usuario;
 
         $this->getConexao()->query($sSql);

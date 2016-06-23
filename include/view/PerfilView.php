@@ -22,6 +22,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+    								<label for="telefone" class="col-md-1 control-label">Telefone</label>
+    								<div class="col-md-9">
+    									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone" maxlength="12">
+    								</div>
+  							</div>
+                <div class="form-group">
                     <label for="email" class="col-md-1 control-label">E-mail</label>
                     <div class="col-md-9">
                         <input id="txbEmail" type="text" class="form-control" name="txbEmail" placeholder="E-mail" maxlength="50">
@@ -42,4 +48,3 @@
         </div>
     </div>
 </div>
-

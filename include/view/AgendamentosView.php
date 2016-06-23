@@ -1,5 +1,6 @@
 <script type="text/javascript" src="../../scripts/alerta.js"></script>
 <script type="text/javascript" src="../../scripts/agendamentos.js"></script>
+
 <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
 
 <div class="container-fluid">

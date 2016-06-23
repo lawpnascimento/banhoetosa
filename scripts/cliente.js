@@ -27,8 +27,8 @@ function buscaClientes(){
                 grid = grid + "<td>" + cliente.nrCpf + "</td>";
                 grid = grid + "<td>" + cliente.nrTelefone + "</td>";
                 grid = grid + "<td>" + cliente.dsPerfil + "</td>";
-                /*grid = grid + "<td style='width: 75px'; href='javascript:void(0);' onClick='aprovarAgendamento(" + agendamento.cdAgendamento + ")'><a style='color:green;'>Tornar Atendente</a></td>";
-                grid = grid + "<td style='width: 75px'; href='javascript:void(0);' onClick='reprovarAgendamento(" + agendamento.cdAgendamento + ")'><a style='color:red;'>Tornar Cliente</a></td>";*/
+                grid = grid + "<td style='width: 75px'; href='javascript:void(0);' ><a style='color:green;'>Habilitar</a></td>";
+                grid = grid + "<td style='width: 75px'; href='javascript:void(0);' ><a style='color:red;'>Desabilitar</a></td>";
                 grid = grid + "</tr>";
             }
             $("#tbCliente").html(grid);

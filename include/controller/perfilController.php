@@ -34,6 +34,7 @@ switch($_POST["action"]) {
         $oModel->setNome($_POST["nome"]);
         $oModel->setSobrenome($_POST["sobrenome"]);
         $oModel->setCpf($_POST["cpf"]);
+        $oModel->setTelefone($_POST["telefone"]);
 
         $oPersistencia->setModel($oModel);
 

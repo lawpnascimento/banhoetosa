@@ -10,6 +10,7 @@ $("#document").ready(function(){
             var txbNome = $("#txbNome").val();
             var txbSobrenome = $("#txbSobrenome").val();
             var txbCpf = $("#txbCpf").val();
+            var txbTelefone = $("#txbTelefone").val();
 
             $.ajax({
                 //Tipo de envio POST ou GET
@@ -21,6 +22,7 @@ $("#document").ready(function(){
                     email: txbEmail,
                     nome: txbNome,
                     sobrenome: txbSobrenome,
+                    telefone: txbTelefone,
                     cpf: txbCpf
                 },
 
@@ -70,6 +72,7 @@ $("#document").ready(function(){
         var txbNome = $("#txbNome");
         var txbSobrenome = $("#txbSobrenome");
         var txbCpf = $("#txbCpf");
+        var txbTelefone = $("#txbTelefone");
 
         var mensagem = "";
         if(txbNome.val() == ""){
@@ -93,6 +96,9 @@ $("#document").ready(function(){
         if(txbCpf.val() == ""){
             mensagem = mensagem.concat("<i><b>CPF</b> é um campo de preenchimento obrigatório</i><br/>");
         }
+        if(txbTelefone.val() == ""){
+            mensagem = mensagem.concat("<i><b>Telefone</b> é um campo de preenchimento obrigatório</i><br/>");
+        }
         else if (!validaCpf(txbCpf.val())){
             mensagem = mensagem.concat("<i><b>CPF</b> deve conter informações válidas</i><br/>");
         }
@@ -105,5 +111,3 @@ $("#document").ready(function(){
     }
 
 });
-
-

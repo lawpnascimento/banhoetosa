@@ -25,6 +25,7 @@ function buscaPerfil(cdPerfil){
                 $("#txbSobrenome").val(perfil.dsSobrenome);
                 $("#txbEmail").val(perfil.dsEmail);
                 $("#txbCpf").val(perfil.nrCpf);
+                $("#txbTelefone").val(perfil.nrTelefone);
 
             }
         }
@@ -37,9 +38,10 @@ $("#btnAtualizar").click(function () {
     var txbNome = $("#txbNome");
     var txbSobrenome = $("#txbSobrenome");
     var txbCpf = $("#txbCpf");
+    var txbTelefone = $("#txbTelefone");
 
 
-    msgErro = validaCampos(txbEmail.val(), txbNome.val(),txbSobrenome.val(),txbCpf.val());
+    msgErro = validaCampos(txbEmail.val(), txbNome.val(),txbSobrenome.val(),txbCpf.val(),txbTelefone.val());
     if(msgErro != ""){
         jbkrAlert.alerta('Alerta!',msgErro);
     }
@@ -53,6 +55,7 @@ $("#btnAtualizar").click(function () {
                 nome: txbNome.val(),
                 sobrenome: txbSobrenome.val(),
                 cpf: txbCpf.val(),
+                telefone: txbTelefone.val(),
                 action: "atualizar"
             },
 
@@ -67,7 +70,7 @@ $("#btnAtualizar").click(function () {
 });
 
 
-function validaCampos(email, nome, sobrenome, cpf){
+function validaCampos(email, nome, sobrenome, cpf, telefone){
 
     var mensagem = "";
     if(nome == ""){
@@ -84,6 +87,9 @@ function validaCampos(email, nome, sobrenome, cpf){
     }
     if(cpf == ""){
         mensagem = mensagem.concat("<br/><i><b>CPF</b> é um campo de preenchimento obrigatório</i>");
+    }
+    if(telefone == ""){
+        mensagem = mensagem.concat("<br/><i><b>Telefone</b> é um campo de preenchimento obrigatório</i>");
     }
     else if (!validaCpf(cpf)){
         mensagem = mensagem.concat("<br/><i><b>CPF</b> deve conter informações válidas</i>");

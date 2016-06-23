@@ -8,6 +8,7 @@ class PerfilModel {
     private $nome;
     private $sobrenome;
     private $cpf;
+    private $telefone;
 
     public function setUsuario($usuario){
         $this->usuario = $usuario;
@@ -42,6 +43,14 @@ class PerfilModel {
     }
     public function getCpf(){
         return $this->cpf;
+    }
+
+    public function setTelefone($telefone){
+      $this->telefone = $telefone;
+    }
+
+    public function getTelefone(){
+      return $this->telefone;
     }
 }
 ?>

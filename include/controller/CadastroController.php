@@ -13,7 +13,8 @@ if($_POST["login"] == '' OR
    $_POST["email"] == '' OR
    $_POST["nome"] == '' OR
    $_POST["sobrenome"] == '' OR
-   $_POST["cpf"] == '' ){
+   $_POST["cpf"] == '' OR
+   $_POST["telefone"] == ''){
 	   exit;
    }
 
@@ -26,6 +27,7 @@ $oModel->setEmail($_POST["email"]);
 $oModel->setNome($_POST["nome"]);
 $oModel->setSobrenome($_POST["sobrenome"]);
 $oModel->setCpf($_POST["cpf"]);
+$oModel->setTelefone($_POST["telefone"]);
 
 $oPersistencia->setModel($oModel);
 
