@@ -1,5 +1,4 @@
 <?php
-/*require_once("../PersistenciaPadrao.php");*/
 require_once("../../estrutura/conexao.php");
 session_start();
 class LoginPersistencia {
@@ -31,7 +30,6 @@ class LoginPersistencia {
                    from tbUsuario
                   where dsLogin = '" . $login . "'" .
                   " and dsSenha = '" . $senha . "'";
-
 
 		$this->getConexao()->conectaBanco();
 

@@ -1,6 +1,5 @@
 <?php
 class Conexao {
-    private $banco;
     private $hostBanco;
     private $portaBanco;
     private $usuarioBanco;
@@ -9,7 +8,6 @@ class Conexao {
     private $conexao;
 
     public function __construct() {
-        $this->banco        = 'MY';
         $this->hostBanco    = 'localhost';
         $this->usuarioBanco = 'root';
         $this->senhaBanco   = 'root';
@@ -18,32 +16,23 @@ class Conexao {
     }
 
     public function conectaBanco() {
-        switch (strtoupper($this->banco)){      
-            case 'MY':
-                $this->conexao = mysql_connect($this->hostBanco,$this->usuarioBanco,$this->senhaBanco);
-               
-                if (!$this->conexao)
-                    exit("Banco n�o conectado [MYSQL]");
-                             
-                $db = mysql_select_db($this->dataBase) or die('Erro ao selecionar o Banco de Dados!');              
-            break;
 
-            default:
-                exit('Banco n�o Configurado!');
-            break;
-        }
+        $this->conexao = mysql_connect($this->hostBanco,$this->usuarioBanco,$this->senhaBanco);
+
+        if (!$this->conexao)
+            exit("Banco nao conectado [MYSQL]");
+
+            $db = mysql_select_db($this->dataBase) or die('Erro ao selecionar o Banco de Dados!');
+
     }
 
     public function query($sSQL) {
         $sSQL = str_replace("'null'","null",$sSQL);
-        
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                mysql_real_escape_string($sSQL);
-                $qQuery = mysql_query($sSQL,$this->conexao);
-            break;
-        }
-    
+
+        mysql_real_escape_string($sSQL);
+        $qQuery = mysql_query($sSQL,$this->conexao);
+
+
         if(!$qQuery)
             exit("Erro ao tentar executar o SQL <br>".$sSQL.mysql_error());
         else
@@ -70,11 +59,8 @@ class Conexao {
     }
 
     public function fetch_object($query) {
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                return mysql_fetch_object($query);
-            break;
-        }
+        return mysql_fetch_object($query);
+
     }
 
     public function exec_sql_trans(&$bErro, $sSQL) {
@@ -84,15 +70,7 @@ class Conexao {
     }
 
     public function fechaConexao() {
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                return mysql_close($this->conexao);
-            break;
-
-            case "PG":
-                return pg_close($this->conexao);
-            break;
-        }
+        return mysql_close($this->conexao);
     }
 
     public function getMaxCodigo($sTabela, $sCampo, $sCondicao = false){
@@ -100,46 +78,23 @@ class Conexao {
         if ($sCondicao){
             $sSQL .= " where ".$sCondicao." ";
         }
-        
+
         $oDados = $this->fetch_query($sSQL);
         return ($oDados->resultado + 1);
     }
 
     public function free_result($qQuery){
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                mysql_free_result($qQuery);
-            break;
-
-            case "PG":
-                pg_free_result($qQuery);
-            break;
-        }
+        mysql_free_result($qQuery);
     }
 
     public function num_rows($qQuery) {
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                $iTotalLinha = mysql_num_rows($qQuery);
-            break;
 
-            case "PG":
-                $iTotalLinha = pg_num_rows($qQuery);
-            break;
-        }
+        $iTotalLinha = mysql_num_rows($qQuery);
         return $iTotalLinha;
     }
 
     public function associativa($qQuery) {
-        switch (strtoupper($this->banco)) {
-            case "MY":
-                return mysql_fetch_assoc($qQuery);
-            break;
-
-            case "PG":
-                return pg_fetch_assoc($qQuery);
-            break;
-        }
+        return mysql_fetch_assoc($qQuery);
     }
 }
 

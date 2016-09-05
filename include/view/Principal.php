@@ -28,7 +28,7 @@
 								<span class="icon-bar"/>
 								<span class="icon-bar"/>
 							</button>
-							<a class="navbar-brand" href="Principal.php">Banho e Tosa</a>
+							<a class="navbar-brand" href="Principal.php">Luluzinha Banho e Tosa</a>
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
@@ -47,24 +47,36 @@
 								</li>
 							</ul>
 							<ul class="nav navbar-nav">
-								<li>
-									<a id="btnCliente" href="#">Clientes</a>
-								</li>
+
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a id="btnCliente" href="#">Clientes</a>
+										</li>
+											<li class="divider"/>
+										<li>
+											<a id="btnParametrizacao" href="#">Parametrizações</a>
+										</li>
+
+								  </ul>
+							  </li>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nome"]) ?><span class="caret"></span></a>
 									<ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a id="btnPerfil" href="#">Perfil</a>
-                                        </li>
-																				<li>
-                                            <a id="btnAjuda" href="#">Ajuda</a>
-                                        </li>
-                                        <li class="divider"/>
-                                        <li>
-                                            <a href="Sair.php">Sair</a>
-                                        </li>
+                      <li>
+                          <a id="btnPerfil" href="#">Perfil</a>
+                      </li>
+											<li class="divider"/>
+											<li>
+                          <a id="btnAjuda" href="#">Ajuda</a>
+                      </li>
+                      <li class="divider"/>
+                      <li>
+                          <a href="Sair.php">Sair</a>
+                      </li>
 								     </ul>
 								</li>
 							</ul>
