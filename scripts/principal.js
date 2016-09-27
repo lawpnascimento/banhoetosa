@@ -74,6 +74,24 @@ $("#btnAvaliacao").click(function(){
 
 });
 
+$("#btnParametrizacao").click(function(){
+    $.ajax({
+        type: "POST",
+        dataType: "text",
+
+        url: "ParametrizacaoView.php",
+
+        success: function(dados){
+            $("#main").html(dados);
+            buscaUsuariosDropdown();
+            buscaPerfisDropdown();
+            buscaSituacoesDropdown();
+        }
+  });
+
+});
+
+
 $("#btnAjuda").click(function(){
     $.ajax({
         type: "POST",

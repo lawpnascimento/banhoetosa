@@ -26,16 +26,19 @@ class LoginPersistencia {
 	    $login = $this->getModel()->getLogin();
         $senha = $this->getModel()->getSenha();
 
-		$sSql = "select *
-                   from tbUsuario
-                  where dsLogin = '" . $login . "'" .
-                  " and dsSenha = '" . $senha . "'";
+		$sSql = "select usu.cdUsuario
+									 ,usu.dsNome
+									 ,usu.cdPerfil
+                   from tbUsuario usu
+                  where usu.dsLogin = '" . $login . "'" .
+                  " and usu.dsSenha = '" . $senha . "'";
 
 		$this->getConexao()->conectaBanco();
 
 		if( $oDados = $this->getConexao()->fetch_query($sSql) ) {
             $_SESSION["cdusuario"] = $oDados->cdUsuario;
             $_SESSION["nome"] = $oDados->dsNome;
+						$_SESSION["cdperfil"] = $oDados->cdPerfil;
 			$logado = true;
 		} else {
             Session_destroy();

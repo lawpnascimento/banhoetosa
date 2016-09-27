@@ -71,7 +71,7 @@ class AgendamentoPersistencia {
                          ON usu.cdUsuario = age.cdUsuario
                        JOIN tbanimal ani
                          ON ani.cdAnimal = age.cdAnimal
-                       JOIN tbsituacao sit
+                       JOIN tbsituacaoagendamento sit
                          ON sit.cdSituacao = age.cdSituacao
                       WHERE age.cdUsuario = " .$usuario;
 
@@ -109,7 +109,7 @@ class AgendamentoPersistencia {
                          ON usu.cdUsuario = age.cdUsuario
                        JOIN tbanimal ani
                          ON ani.cdAnimal = age.cdAnimal
-                       JOIN tbsituacao sit
+                       JOIN tbsituacaoagendamento sit
                          ON sit.cdSituacao = age.cdSituacao
                       WHERE age.cdUsuario = " .$usuario."
                         AND age.cdAgendamento = " . $codigo."
