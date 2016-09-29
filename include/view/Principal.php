@@ -41,27 +41,29 @@
 									<a id="btnAgendamentos" href="#">Agendamentos</a>
 								</li>
 							</ul>
-							<ul class="nav navbar-nav">
-								<li>
-									<a id="btnAvaliacao" href="#">Avaliações</a>
-								</li>
-							</ul>
-							<ul class="nav navbar-nav">
+							<div id="divAdministradores" <?php echo $_SESSION["cdperfil"] == 1 ? "style='display:none;'" : "style='display:block;'"?>>
+								<ul class="nav navbar-nav" >
+									<li>
+										<a id="btnAvaliacao" href="#">Avaliações</a>
+									</li>
+								</ul>
+								<ul class="nav navbar-nav">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
+										<ul class="dropdown-menu" role="menu" >
+											<li>
+												<a id="btnCliente" href="#">Clientes</a>
+											</li>
+												<li class="divider"/>
+											<li>
+												<a id="btnParametrizacao" href="#">Parametrizações</a>
+											</li>
 
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administração<span class="caret"></span></a>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-											<a id="btnCliente" href="#">Clientes</a>
-										</li>
-											<li class="divider"/>
-										<li>
-											<a id="btnParametrizacao" href="#">Parametrizações</a>
-										</li>
+									  </ul>
+								  </li>
+								</ul>
+							</div>
 
-								  </ul>
-							  </li>
-							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo ucfirst($_SESSION["nome"]) ?><span class="caret"></span></a>
