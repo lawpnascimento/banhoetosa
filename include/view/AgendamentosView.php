@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <input type="hidden" id="hdfcdAgendamento">
                     <label for="data" class="col-md-1 control-label">Data</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="input-group date" id="divDtpAgendamento">
                             <input id="dtpAgendamento" readonly="true" type="text" class=" datepicker form-control" data-date-format="dd/mm/yyyy" maxlength="10" />
                                 <span class="input-group-addon">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label for="horario" class="col-md-1 control-label">Horário</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <button  class="btn btn-default dropdown-toggle form-control" type="button" id="ddlHorarioDe" data-toggle="dropdown" aria-expanded="true" name="De">
                                 De
@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label for="horario" class="col-md-1 control-label"></label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlHorarioAte" data-toggle="dropdown" aria-expanded="true" name="Até">
                                 Até
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label for="pagamento" class="col-md-1 control-label">Pagamento</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlPagamento" data-toggle="dropdown" aria-expanded="true" name="Pagamento">
                                 Pagamento
@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group">
                     <label for="animal" class="col-md-1 control-label">Animal</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlAnimal" data-toggle="dropdown" aria-expanded="true" name="Animal">
                                 Animal

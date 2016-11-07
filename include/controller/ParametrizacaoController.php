@@ -13,20 +13,20 @@ require_once("../../estrutura/iniciar_sessao.php");
 switch($_POST["action"]){
 
     case 'atualizar':
-      /*  $oModel = new ParametrizacaoModel();
+
+        $oModel = new ParametrizacaoModel();
 
         $oPersistencia = new ParametrizacaoPersistencia();
-
-        $oModel->setNome($_POST["nome"]);
-        $oModel->setRaca($_POST["raca"]);
-        $oModel->setIdade($_POST["idade"]);
-        $oModel->setPorte($_POST["porte"]);
-        $oModel->setUsuario($_SESSION["cdusuario"]);
-        $oModel->setCodigo($_POST["codigo"]);
+        $oModel->setEmpresa($_POST["empresa"]);
+        $oModel->setUsuario($_POST["usuario"]);
+        $oModel->setPerfil($_POST["perfil"]);
+        $oModel->setSituacao($_POST["situacao"]);
+        $oModel->setHorarioDe($_POST["horarioDe"]);
+        $oModel->setHorarioAte($_POST["horarioAte"]);
 
         $oPersistencia->setModel($oModel);
 
-        $oPersistencia->Atualizar();*/
+        $oPersistencia->Atualizar();
 
         break;
 

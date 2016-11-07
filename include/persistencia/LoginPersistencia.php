@@ -29,6 +29,7 @@ class LoginPersistencia {
 		$sSql = "select usu.cdUsuario
 									 ,usu.dsNome
 									 ,usu.cdPerfil
+									 ,usu.dsSobrenome
                    from tbUsuario usu
                   where usu.dsLogin = '" . $login . "'" .
                   " and usu.dsSenha = '" . $senha . "'";
@@ -39,6 +40,7 @@ class LoginPersistencia {
             $_SESSION["cdusuario"] = $oDados->cdUsuario;
             $_SESSION["nome"] = $oDados->dsNome;
 						$_SESSION["cdperfil"] = $oDados->cdPerfil;
+						$_SESSION["dssobrenome"] = $oDados->dsSobrenome;
 			$logado = true;
 		} else {
             Session_destroy();

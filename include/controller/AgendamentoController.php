@@ -25,7 +25,16 @@ switch($_POST["action"]){
 
         $oPersistencia->setModel($oModel);
 
-        $oPersistencia->Inserir();
+        $AgendamentoValido = $oPersistencia->Inserir();
+
+        if($AgendamentoValido == 1)
+          echo '{ "mensagem": "Agendamento cadastrado com sucesso!", "status" : "1" }';
+        elseif($AgendamentoValido == 2)
+          echo '{ "mensagem": "Agendamento fora do horário permitido", "status" : "2" }';
+        elseif($AgendamentoValido == 3)
+          echo '{ "mensagem": "Já existe agendamento para o período informado", "status" : "3" }';
+        elseif($AgendamentoValido == 4)
+          echo '{ "mensagem": "Já existe uma solicitação de agendamento pendente para o animal informado", "status": "4" }';
         break;
 
     case 'buscar':

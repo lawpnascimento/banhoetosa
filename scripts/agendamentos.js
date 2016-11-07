@@ -146,7 +146,15 @@ $("#document").ready(function() {
 
                 //Se der tudo ok no envio...
                 success: function (dados) {
-                    jbkrAlert.sucesso('Agendamentos', 'Agendamento cadastrado com sucesso!');
+
+                    var json = $.parseJSON(dados);
+
+                    //Erro horario
+                    if (json.status == 1)
+                      jbkrAlert.sucesso('Agendamentos', json.mensagem);
+                    else
+                      jbkrAlert.alerta('Alerta', json.mensagem);
+
                     $("#agendamentosform #btnCancelar").trigger("click");
                 }
             });

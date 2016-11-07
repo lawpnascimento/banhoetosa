@@ -12,19 +12,19 @@
                 <input type="hidden" id="hdfcdAnimal">
                 <div class="form-group">
                     <label for="nome" class="col-md-1 control-label">Nome</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="raca" class="col-md-1 control-label">Raça</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <input id="txbRaca" type="text" class="form-control" name="txbRaca" placeholder="Raça"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idade" class="col-md-1 control-label">Idade</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade"></input>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <label for="porte" class="col-md-1 control-label">Porte</label>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="dropdown">
                             <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlPorte" data-toggle="dropdown" aria-expanded="true" name="Porte">
                                 Porte

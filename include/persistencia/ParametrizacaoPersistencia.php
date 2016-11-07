@@ -119,8 +119,7 @@ class ParametrizacaoPersistencia {
         return $retorno;
     }
 
-    public function buscaPerfisDropdownUsuarios()
-    {
+    public function buscaPerfisDropdownUsuarios(){
       $usuario = $this->getModel()->getUsuario();
 
       $this->getConexao()->conectaBanco();
@@ -160,8 +159,7 @@ class ParametrizacaoPersistencia {
 
     }
 
-    public function buscaSituacaoDropdownUsuarios()
-    {
+    public function buscaSituacaoDropdownUsuarios(){
       $usuario = $this->getModel()->getUsuario();
 
       $this->getConexao()->conectaBanco();
@@ -200,34 +198,39 @@ class ParametrizacaoPersistencia {
 
     }
 
-
-
     public function Atualizar(){
         $this->getConexao()->conectaBanco();
-
-        $nome = $this->getModel()->getNome();
-        $raca = $this->getModel()->getRaca();
-        $idade = intval($this->getModel()->getIdade());
-        $porte = intval($this->getModel()->getPorte());
+        $empresa = $this->getModel()->getEmpresa();
         $usuario = intval($this->getModel()->getUsuario());
-        $codigo = intval($this->getModel()->getCodigo());
+        $perfil = intval($this->getModel()->getPerfil());
+        $situacao = intval($this->getModel()->getSituacao());
+        $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
+        $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
 
-        $sSql = "UPDATE tbanimal ani
-                	  SET ani.dsNome = '" . $nome ."'
-                	     ,ani.dsRaca = '" . $raca ."'
-                	     ,ani.nrIdade = " . $idade ."
-                	     ,ani.cdPorte = " . $porte ."
-                	WHERE ani.cdAnimal = " . $codigo;
+        if($situacao == 1)
+            $inativo = "A";
+        else
+            $inativo = "I";
+
+        $sSql = "UPDATE tbusuario usu
+                	  SET usu.cdPerfil = " . $perfil ."
+                	     ,usu.idSituacao = '" . $inativo ."'
+                	WHERE usu.cdUsuario = " . $usuario;
+
+        $this->getConexao()->query($sSql);
+
+        $sSql = "UPDATE tbempresa emp
+                	  SET emp.nmEmpresa = '" . $empresa ."'
+                	     ,emp.hrInicial = '" . $horarioDe ."'
+                       ,emp.hrFinal = '" . $horarioAte ."'
+                	WHERE emp.cdEmpresa = 1";
 
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
     }
 
-
 }
-
-
 
 
 ?>

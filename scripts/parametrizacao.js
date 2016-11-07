@@ -1,35 +1,38 @@
-$("#animaisform #btnAtualizar").click(function () {
+$("#parametrizacaoForm #btnAtualizar").click(function () {
+    var txbEmpresa = $("#txbEmpresa").val();
+    var ddlUsuario = $("#ddlUsuario").val();
+    var ddlPerfil = $("#ddlPerfil").val();
+    var ddlSituacao = $("#ddlSituacao").val();
+    var txbHorarioDe = $("#txbHorarioDe").val();
+    var txbHorarioAte = $("#txbHorarioAte").val();
 
-    var txbNome = $("#txbNome").val();
-    var txbRaca = $("#txbRaca").val();
-    var txbIdade = $("#txbIdade").val();
-    var ddlPorte = $("#ddlPorte").val();
-    var cdAnimal = $("#hdfcdAnimal").val();
+    validaCampos(txbEmpresa, ddlUsuario, ddlPerfil, ddlSituacao, txbHorarioDe, txbHorarioAte);
 
-    if(validaCampos(txbNome, txbRaca, ddlPorte) != ""){
+    if(msgErro != "")
         jbkrAlert.alerta('Alerta!',msgErro);
-    }
     else{
         $.ajax({
             //Tipo de envio POST ou GET
             type: "POST",
             dataType: "text",
             data: {
-                nome: txbNome,
-                raca: txbRaca,
-                idade: txbIdade,
-                porte: ddlPorte,
-                codigo: cdAnimal,
+                empresa: txbEmpresa,
+                usuario: ddlUsuario,
+                perfil: ddlPerfil,
+                situacao: ddlSituacao,
+                horarioDe: txbHorarioDe,
+                horarioAte: txbHorarioAte,
                 action: "atualizar"
             },
 
-            url: "../controller/AnimalController.php",
+            url: "../controller/ParametrizacaoController.php",
 
             //Se der tudo ok no envio...
             success: function (dados) {
                 jbkrAlert.sucesso('Animais', 'Animal atualizado com sucesso!');
-                $("#animaisform #btnCancelar").trigger("click");
+                $("#parametrizacaoForm #btnCancelar").trigger("click");
             }
+
         });
     }
 });
@@ -44,7 +47,7 @@ function buscaUsuariosDropdown(){
             action: "usuariosdropdown"
         },
 
-        url: "../controller/parametrizacaoController.php",
+        url: "../controller/ParametrizacaoController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
@@ -58,16 +61,16 @@ function buscaUsuariosDropdown(){
                 dropdown = dropdown + '<li class="liUsuarios" role="presentation" value="' + usuario.cdUsuario  + '"><a role="menuitem" tabindex="-1" href="#">' + usuario.dsNome + '</a></li>';
 
             }
-            $("#ulUsuarios").html(dropdown);
+            $("#ulUsuario").html(dropdown);
 
-            $("#ulUsuarios li a").click(function(){
+            $("#ulUsuario li a").click(function(){
 
-                $("#ddlUsuarios:first-child").text($(this).text());
+                $("#ddlUsuario:first-child").text($(this).text());
 
-                $("#ulUsuarios li").each(function(){
+                $("#ulUsuario li").each(function(){
 
-                    if ($(this).text() == $("#ddlUsuarios").text().trim()){
-                        $("#ddlUsuarios").val($(this).val());
+                    if ($(this).text() == $("#ddlUsuario").text().trim()){
+                        $("#ddlUsuario").val($(this).val());
                     }
                 });
 
@@ -232,13 +235,12 @@ function buscaSituacoesDropdown(){
   }
 
 /*Função deve ser chamada dentro da função que carrega a dropdown assim é possível realizar um onclick dos itens da dropdown*/
-function cliqueDropDownUsuarios()
-{
-  $("#ulUsuarios li a").click(function(){
+function cliqueDropDownUsuarios(){
+  $("#ulUsuario li a").click(function(){
 
-    $("#ulUsuarios li").each(function(){
+    $("#ulUsuario li").each(function(){
 
-        if ($(this).text() == $("#ddlUsuarios").text().trim()){
+        if ($(this).text() == $("#ddlUsuario").text().trim()){
           buscaPerfisDropdownUsuario($(this).val());
           buscaSituacaoDropdownUsuario($(this).val());
         }
@@ -247,3 +249,54 @@ function cliqueDropDownUsuarios()
   });
 
 }
+
+function validaCampos(empresa, usuario, perfil, situacao, horarioDe, horarioAte){
+    var msgErro = "";
+    if(empresa == ""){
+        msgErro = msgErro + "<b>Empresa</b> e um campo de preenchimento obrigatorio";
+    }
+    if(horarioDe == ""){
+        msgErro = msgErro + "</br><b>Horario De</b> e um campo de preenchimento obrigatorio";
+    }
+    if(horarioAte == ""){
+        msgErro = msgErro + "</br><b>Horario Ate</b> e um campo de preenchimento obrigatorio";
+    }
+
+    return msgErro;
+
+}
+
+function buscaParametrizacao(){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            codigo: cdAnimal,
+            nome: txbNome,
+            raca: txbRaca,
+            idade: txbIdade,
+            porte: ddlPorte,
+            action: "buscar"
+        },
+
+        url: "../controller/ParametrizacaoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            for (var i = 0; i < json.length; i++) {
+                var animal = json[i];
+
+                $("#txbNome").val(animal.dsNome);
+                $("#txbRaca").val(animal.dsRaca);
+                $("#txbIdade").val(animal.nrIdade);
+
+                $("#ddlPorte:first-child").text(animal.dsPorte);
+                $("#ddlPorte:first-child").val(animal.cdPorte);
+                $("#hdfcdAnimal").val(animal.cdAnimal);
+                }
+        }
+    });
+
+};

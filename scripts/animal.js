@@ -46,8 +46,6 @@ $("#document").ready(function() {
 
     $("#animaisform #btnExcluir").click(function () {
 
-        alert(validaExclusao());
-        return;
         if (validaExclusao()){
             var cdAnimal = $("#hdfcdAnimal").val();
 
@@ -85,7 +83,9 @@ $("#document").ready(function() {
         var ddlPorte = $("#ddlPorte").val();
         var cdAnimal = $("#hdfcdAnimal").val();
 
-        if(validaCampos(txbNome, txbRaca, ddlPorte) != ""){
+        var msgErro = validaCampos(txbNome, txbRaca, ddlPorte);
+
+        if(msgErro != ""){
             jbkrAlert.alerta('Alerta!',msgErro);
         }
         else{
@@ -267,7 +267,7 @@ function validaExclusao(){
         }
 
     });
-    
+
     if (retornoJson.idExclusao == "N")
       return true;
     else

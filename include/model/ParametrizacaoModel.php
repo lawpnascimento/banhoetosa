@@ -2,9 +2,19 @@
 
 class ParametrizacaoModel {
 
+    private $empresa;
     private $usuario;
     private $perfil;
     private $situacao;
+    private $horarioDe;
+    private $horarioAte;
+
+    public function setEmpresa($empresa){
+        $this->empresa = $empresa;
+    }
+    public function getEmpresa(){
+        return $this->empresa;
+    }
 
     public function setUsuario($usuario){
         $this->usuario = $usuario;
@@ -14,7 +24,7 @@ class ParametrizacaoModel {
     }
 
     public function setPerfil($perfil){
-        $this->$perfil = $perfil;
+        $this->perfil = $perfil;
     }
     public function getPerfil(){
         return $this->perfil;
@@ -24,6 +34,19 @@ class ParametrizacaoModel {
     }
     public function getSituacao(){
         return $this->situacao;
+    }
+    public function setHorarioDe($horarioDe){
+        $this->horarioDe = $horarioDe;
+    }
+    public function getHorarioDe(){
+        return $this->horarioDe;
+    }
+
+    public function setHorarioAte($horarioAte){
+        $this->horarioAte = $horarioAte;
+    }
+    public function getHorarioAte(){
+        return $this->horarioAte;
     }
 
 }
