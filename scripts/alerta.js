@@ -4,7 +4,7 @@ var jbkrAlert = (function () {
         modal.modal('show').on('hidden', function () {
             $('.modal-alerta').remove();
         });
-    }
+    };
 
     var exibirAlerta = function (titulo, mensagem) {
         criarModal();

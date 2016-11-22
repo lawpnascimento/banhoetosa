@@ -89,232 +89,31 @@
 		    <div class="row">
 				<div id="main" role="main">
 					<div class="panel panel-default">
+			        <div class="panel-heading">
+			            <div class="panel-title">Agenda Diária</div>
+			        </div>
+			        <div class="panel-body" >
+			            <form id="frmAgendamentosConsulta" class="form-horizontal" role="form">
+										<div class="form-group">
+												<label for="data" class="col-md-1 control-label">Data</label>
+												<div class="col-md-4">
+															<input id="gdpDtAgendamento" type="date" class="form-control" name="gdpDtAgendamento"></input>
+												</div>
+										</div>
+			            </form>
+			        </div>
+			    </div>
+					<div class="panel panel-default">
 						<!-- Table -->
 						<table class="table">
 							<thead>
 								<tr>
 									<th>
-										Data Atendimento
-									</th>
-
-									<th>
 										Horário
-									</th>
-									<th>
-										Cliente
-									</th>
-									<th>
-										Raça
-									</th>
-									<th>
-										Porte
-									</th>
-									<th>
-										Forma de pagamento
 									</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
-								<tr>
-									<td>
-										15/06/2016
-									</td>
-									<td>
-										13:00 ~ 14:00
-									</td>
-									<td>
-										João
-									</td>
-									<td>
-										Tomba lata
-									</td>
-									<td>
-										Monstro
-									</td>
-									<td>
-										Dinheiro
-									</td>
-								</tr>
+							<tbody id="grdPrincipal">
 							</tbody>
 						</table>
 					</div>
