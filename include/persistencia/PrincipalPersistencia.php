@@ -51,16 +51,27 @@ class PrincipalPersistencia {
            $retorno =  $this->validaHorarioAgendamento($data, $i, $i + 1);
 
           $arr = json_decode($retorno, true);
-          ECHO $arr[0]['idReservado'];
-           if($arr[0]['idReservado'] == 1){
-               $grid .=  "<tr style='background-color:rgb(166, 166, 166)'>";
-               $grid .=   "<td>" . $i . ":00</td>";
-               $grid .=   "<td>" . $arr[0]['dsNome'] . "</td>";
-               $grid .=   "<td>" . $arr[0]['nmAnimal'] . "</td>";
-               $grid .=   "<td>" . $arr[0]['dsRaca'] . "</td>";
-               $grid .=   "<td>" . $arr[0]['dsPorte'] . "</td>";
-               $grid .=   "<td>" . $arr[0]['nrTelefone'] . "</td>";
-               $grid .=   "</tr>";
+          if($arr[0]['idReservado'] == 1){
+               if ($_SESSION["cdperfil"] <> 1){
+                 $grid .=  "<tr style='background-color:rgb(166, 166, 166)'>";
+                 $grid .=   "<td>" . $i . ":00</td>";
+                 $grid .=   "<td>" . $arr[0]['dsNome'] . "</td>";
+                 $grid .=   "<td>" . $arr[0]['nmAnimal'] . "</td>";
+                 $grid .=   "<td>" . $arr[0]['dsRaca'] . "</td>";
+                 $grid .=   "<td>" . $arr[0]['dsPorte'] . "</td>";
+                 $grid .=   "<td>" . $arr[0]['nrTelefone'] . "</td>";
+                 $grid .=   "</tr>";
+               }
+               else {
+                 $grid .=  "<tr style='background-color:rgb(128, 255, 128)'>";
+                 $grid .=   "<td>" . $i . ":00</td>";
+                 $grid .=   "<td></td>";
+                 $grid .=   "<td></td>";
+                 $grid .=   "<td></td>";
+                 $grid .=   "<td></td>";
+                 $grid .=   "<td></td>";
+                 $grid .=  "</tr>";
+               }
 
            }else{
                $grid .=  "<tr style='background-color:rgb(128, 255, 128)'>";
@@ -71,7 +82,6 @@ class PrincipalPersistencia {
                $grid .=   "<td></td>";
                $grid .=   "<td></td>";
                $grid .=  "</tr>";
-
            }
 
         }
