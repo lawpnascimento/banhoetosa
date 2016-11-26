@@ -3,6 +3,7 @@
 	<head>
 		<title>Banho e tosa</title>
 		<script type="text/javascript" src="../../scripts/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../../scripts/jquery.mask.min.js"></script>
 		<link href="../../css/bootstrap.css" rel="stylesheet" media="screen" />
 		<link href="../../css/login.css" rel="stylesheet" media="screen" />
 		<script type="text/javascript" src="../../scripts/bootstrap.js"></script>
@@ -74,7 +75,7 @@
 							<div class="form-group">
 								<label for="telefone" class="col-md-3 control-label">Telefone</label>
 								<div class="col-md-9">
-									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone" maxlength="12">
+									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone">
 								</div>
 							</div>
 							<div class="form-group">
