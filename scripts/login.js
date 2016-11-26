@@ -1,13 +1,18 @@
 $(document).ready(function(){
 		$("#txbLogin").focus();
-        $('#txbTelefone').mask('(00) 0000-0000');
+  	$('#txbTelefone').mask('(00) 0000-0000');
+
+
+		$("#loginform #txbSenha").on('keyup', function(event) {
+			 if(event.keyCode == 13){
+			     $("#btnLogin").click();
+			 }
+    });
+
+
 	});
 
-	/*$("#loginform #txbSenha").keyUp(function(event){
-	    if(event.keyCode == 13){
-	        $("#btnLogin").click();
-	    }
-	});*/
+
 
 $("#loginform #btnLogin").click(function(){
     var txbLogin = $("#txbLogin").val();

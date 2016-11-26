@@ -75,7 +75,7 @@
 							<div class="form-group">
 								<label for="telefone" class="col-md-3 control-label">Telefone</label>
 								<div class="col-md-9">
-									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone">
+									<input id="txbTelefone" type="text" class="form-control" name="txbTelefone" placeholder="Telefone" maxlength="15">
 								</div>
 							</div>
 							<div class="form-group">

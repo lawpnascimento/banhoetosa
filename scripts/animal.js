@@ -26,7 +26,7 @@ $("#document").ready(function() {
 
                 //Se der tudo ok no envio...
                 success: function (dados) {
-                    jbkrAlert.sucesso('Animais', 'Animais cadastrado com sucesso!');
+                    jbkrAlert.sucesso('Animal', 'Animal cadastrado com sucesso!');
                     $("#animaisform #btnCancelar").trigger("click");
                 }
             });
@@ -46,32 +46,26 @@ $("#document").ready(function() {
 
     $("#animaisform #btnExcluir").click(function () {
 
-        if (validaExclusao()){
-            var cdAnimal = $("#hdfcdAnimal").val();
+        var cdAnimal = $("#hdfcdAnimal").val();
 
-            $.ajax({
-                //Tipo de envio POST ou GET
-                type: "POST",
-                dataType: "text",
-                data: {
-                    codigo: cdAnimal,
-                    action: "excluir"
-                },
+        $.ajax({
+            //Tipo de envio POST ou GET
+            type: "POST",
+            dataType: "text",
+            data: {
+                codigo: cdAnimal,
+                action: "excluir"
+            },
 
-                url: "../controller/AnimalController.php",
+            url: "../controller/AnimalController.php",
 
-                //Se der tudo ok no envio...
-                success: function (dados) {
-                    jbkrAlert.sucesso('Animais', 'Animal excluído com sucesso!');
-                    $("#animaisform #btnCancelar").trigger("click");
-                }
-            });
-        }
-        else {
-          jbkrAlert.sucesso('Animais', 'Não é possível excluir este animal pois está vinculado a um agendamento!');
-          $("#animaisform #btnCancelar").trigger("click");
-
-        }
+            //Se der tudo ok no envio...
+            success: function (dados) {
+                var json = $.parseJSON(dados);
+                jbkrAlert.sucesso('Animal', json[0].mensagem);
+                $("#animaisform #btnCancelar").trigger("click");
+            }
+        });
 
     });
 
@@ -220,14 +214,15 @@ function buscaAnimais(cdAnimal){
                     grid = grid + "<td href='javascript:void(0);' onClick='buscaAnimais(" + animal.cdAnimal + ")'><a>Editar</a></td>";
                     grid = grid + "</tr>";
                 }
+
                 $("#tbanimal").html(grid);
             }
             //Carregando valor para atualizar
             else
             {
                 formularioModoAtualizar();
-                for (var i = 0; i < json.length; i++) {
-                    animal = json[i];
+                for (var j = 0; j < json.length; j++) {
+                    animal = json[j];
 
                     $("#txbNome").val(animal.dsNome);
                     $("#txbRaca").val(animal.dsRaca);
@@ -241,9 +236,9 @@ function buscaAnimais(cdAnimal){
         }
     });
 
-};
+}
 
-function validaExclusao(){
+/*function validaExclusao(){
     var cdAnimal = $("#hdfcdAnimal").val();
 
     var retorno = "";
@@ -262,16 +257,17 @@ function validaExclusao(){
         success: function (dados) {
 
             var json = $.parseJSON(dados);
-            var retornoJson = json[0];
-            retorno = retornoJson.idExclusao;
+
+            var retorno = null;
+
+            for (var i = 0; i < json.length; i++) {
+                retorno = json[i];
+            }
+            return retorno.idExclusao;
+
         }
 
     });
 
-    if (retornoJson.idExclusao == "N")
-      return true;
-    else
-      return false;
 
-
-}
+}*/

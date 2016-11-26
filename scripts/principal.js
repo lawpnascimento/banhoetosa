@@ -123,6 +123,8 @@ $(document).ready(function(){
 
           success: function(dados){
               $("#main").html(dados);
+              buscaUsuario();
+              buscaEmpresa();
               buscaUsuariosDropdown();
               buscaPerfisDropdown();
               buscaSituacoesDropdown();

@@ -6,7 +6,7 @@ $("#parametrizacaoForm #btnAtualizar").click(function () {
     var txbHorarioDe = $("#txbHorarioDe").val();
     var txbHorarioAte = $("#txbHorarioAte").val();
 
-    validaCampos(txbEmpresa, ddlUsuario, ddlPerfil, ddlSituacao, txbHorarioDe, txbHorarioAte);
+    var msgErro = validaCampos(txbEmpresa, txbHorarioDe, txbHorarioAte);
 
     if(msgErro != "")
         jbkrAlert.alerta('Alerta!',msgErro);
@@ -29,7 +29,7 @@ $("#parametrizacaoForm #btnAtualizar").click(function () {
 
             //Se der tudo ok no envio...
             success: function (dados) {
-                jbkrAlert.sucesso('Animais', 'Animal atualizado com sucesso!');
+                jbkrAlert.sucesso('Parametrização', 'Parametrização atualizado com sucesso!');
                 $("#parametrizacaoForm #btnCancelar").trigger("click");
             }
 
@@ -126,6 +126,50 @@ function buscaPerfisDropdown(){
     });
 }
 
+function buscaSituacoesDropdown(){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "situacoesdropdown"
+        },
+
+        url: "../controller/parametrizacaoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var situacao = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + situacao.cdSituacao  + '"><a role="menuitem" tabindex="-1" href="#">' + situacao.dsSituacao + '</a></li>';
+
+            }
+            $("#ulSituacao").html(dropdown);
+
+            $("#ulSituacao li a").click(function(){
+
+                $("#ddlSituacao:first-child").text($(this).text());
+
+                $("#ulSituacao li").each(function(){
+
+                    if ($(this).text() == $("#ddlSituacao").text().trim()){
+                        $("#ddlSituacao").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+  }
+
 function buscaPerfisDropdownUsuario(usuario){
     $.ajax({
         //Tipo de envio POST ou GET
@@ -190,49 +234,7 @@ function buscaSituacaoDropdownUsuario(usuario){
     });
 }
 
-function buscaSituacoesDropdown(){
 
-    $.ajax({
-        //Tipo de envio POST ou GET
-        type: "POST",
-        dataType: "text",
-        data: {
-            action: "situacoesdropdown"
-        },
-
-        url: "../controller/parametrizacaoController.php",
-
-        //Se der tudo ok no envio...
-        success: function (dados) {
-
-            var json = $.parseJSON(dados);
-
-            var dropdown = "";
-            for (var i = 0; i < json.length; i++) {
-
-                var situacao = json[i];
-
-                dropdown = dropdown + '<li role="presentation" value="' + situacao.cdSituacao  + '"><a role="menuitem" tabindex="-1" href="#">' + situacao.dsSituacao + '</a></li>';
-
-            }
-            $("#ulSituacao").html(dropdown);
-
-            $("#ulSituacao li a").click(function(){
-
-                $("#ddlSituacao:first-child").text($(this).text());
-
-                $("#ulSituacao li").each(function(){
-
-                    if ($(this).text() == $("#ddlSituacao").text().trim()){
-                        $("#ddlSituacao").val($(this).val());
-                    }
-                });
-
-            });
-        }
-
-    });
-  }
 
 /*Função deve ser chamada dentro da função que carrega a dropdown assim é possível realizar um onclick dos itens da dropdown*/
 function cliqueDropDownUsuarios(){
@@ -250,7 +252,7 @@ function cliqueDropDownUsuarios(){
 
 }
 
-function validaCampos(empresa, usuario, perfil, situacao, horarioDe, horarioAte){
+function validaCampos(empresa, horarioDe, horarioAte){
     var msgErro = "";
     if(empresa == ""){
         msgErro = msgErro + "<b>Empresa</b> e um campo de preenchimento obrigatorio";
@@ -266,37 +268,72 @@ function validaCampos(empresa, usuario, perfil, situacao, horarioDe, horarioAte)
 
 }
 
-function buscaParametrizacao(){
+function buscaUsuario(){
 
     $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
-            codigo: cdAnimal,
-            nome: txbNome,
-            raca: txbRaca,
-            idade: txbIdade,
-            porte: ddlPorte,
-            action: "buscar"
+          action: "buscausuario"
         },
 
-        url: "../controller/ParametrizacaoController.php",
+        url: "../controller/parametrizacaoController.php",
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            for (var i = 0; i < json.length; i++) {
-                var animal = json[i];
+          var json = $.parseJSON(dados);
 
-                $("#txbNome").val(animal.dsNome);
-                $("#txbRaca").val(animal.dsRaca);
-                $("#txbIdade").val(animal.nrIdade);
 
-                $("#ddlPorte:first-child").text(animal.dsPorte);
-                $("#ddlPorte:first-child").val(animal.cdPorte);
-                $("#hdfcdAnimal").val(animal.cdAnimal);
-                }
+          for (var i = 0; i < json.length; i++) {
+
+              var usuario = json[i];
+
+              $("#ddlUsuario").val(usuario.cdUsuario);
+              $("#ddlPerfil").val(usuario.cdPerfil);
+              $("#ddlSituacao").val(usuario.idSituacao);
+              $("#ddlUsuario").text(usuario.dsNome) ;
+              $("#ddlPerfil").text(usuario.dsPerfil);
+              $("#ddlSituacao").text(usuario.dsSituacao);
+          }
+
         }
+
     });
 
-};
+
+}
+
+function buscaEmpresa(){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+          action: "buscaempresa"
+        },
+
+        url: "../controller/parametrizacaoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+          var json = $.parseJSON(dados);
+
+
+          for (var i = 0; i < json.length; i++) {
+
+              var empresa = json[i];
+
+              $("#txbEmpresa").val(empresa.nmEmpresa);
+              $("#txbHorarioDe").val(empresa.hrInicial);
+              $("#txbHorarioAte").val(empresa.hrFinal);
+
+          }
+
+        }
+
+    });
+
+
+}

@@ -30,7 +30,34 @@ switch($_POST["action"]){
 
         break;
 
+    case 'buscausuario':
 
+        $oModel = new ParametrizacaoModel();
+
+        $oPersistencia = new ParametrizacaoPersistencia();
+
+        $oModel->setUsuario($_SESSION['cdusuario']);
+
+        $oPersistencia->setModel($oModel);
+
+        $retorno = $oPersistencia->buscaUsuario();
+
+        echo $retorno;
+        break;
+    case 'buscaempresa':
+
+        $oModel = new ParametrizacaoModel();
+
+        $oPersistencia = new ParametrizacaoPersistencia();
+
+        $oModel->setEmpresa(1);
+
+        $oPersistencia->setModel($oModel);
+
+        $retorno = $oPersistencia->buscaEmpresa();
+
+        echo $retorno;
+        break;
     case 'usuariosdropdown':
 
         $oPersistencia = new ParametrizacaoPersistencia();

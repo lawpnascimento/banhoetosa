@@ -32,8 +32,8 @@ class AgendamentoPersistencia {
         //Agendamento é valido
         if($agendamentoValido == "1"){
 
-          $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
-          $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
+          $horarioDe = date("H:i", strtotime($this->getModel()->getHorarioDe()));
+          $horarioAte = date("H:i", strtotime($this->getModel()->getHorarioAte()));
           $animal = intval($this->getModel()->getAnimal());
           $data = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
           $usuario = intval($this->getModel()->getUsuario());

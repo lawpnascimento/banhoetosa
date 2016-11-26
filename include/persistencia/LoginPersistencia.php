@@ -30,6 +30,9 @@ class LoginPersistencia {
 									 ,usu.dsNome
 									 ,usu.cdPerfil
 									 ,usu.dsSobrenome
+									 ,(select emp.nmEmpresa
+				 					    from tbempresa emp
+										 where emp.cdEmpresa = 1) nmEmpresa
                    from tbUsuario usu
                   where usu.dsLogin = '" . $login . "'" .
                   " and usu.dsSenha = '" . $senha . "'";
@@ -41,6 +44,7 @@ class LoginPersistencia {
             $_SESSION["nome"] = $oDados->dsNome;
 						$_SESSION["cdperfil"] = $oDados->cdPerfil;
 						$_SESSION["dssobrenome"] = $oDados->dsSobrenome;
+						$_SESSION["nmEmpresa"] = $oDados->nmEmpresa;
 			$logado = true;
 		} else {
             Session_destroy();

@@ -28,7 +28,7 @@
 								<span class="icon-bar"/>
 								<span class="icon-bar"/>
 							</button>
-							<a class="navbar-brand" href="Principal.php">Luluzinha Banho e Tosa</a>
+							<a class="navbar-brand" href="Principal.php"><?php echo $_SESSION["nmEmpresa"]?></a>
 						</div>
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">

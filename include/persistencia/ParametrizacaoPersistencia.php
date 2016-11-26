@@ -168,7 +168,7 @@ class ParametrizacaoPersistencia {
                   	 ,con.dsConstante
                  FROM tbusuario usu
                  JOIN tbconstante con
-                   ON con.vlConstate = usu.idSituacao
+                   ON con.vlConstante = usu.idSituacao
                   AND con.idConstante = 'SITUACAO_ATIVO_INATIVO'
                 WHERE usu.cdUsuario = " . $usuario  ;
 
@@ -204,8 +204,9 @@ class ParametrizacaoPersistencia {
         $usuario = intval($this->getModel()->getUsuario());
         $perfil = intval($this->getModel()->getPerfil());
         $situacao = intval($this->getModel()->getSituacao());
-        $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
-        $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
+
+        $horarioDe = date("H:i", strtotime($this->getModel()->getHorarioDe()));
+        $horarioAte = date("H:i", strtotime($this->getModel()->getHorarioAte()));
 
         if($situacao == 1)
             $inativo = "A";
@@ -228,6 +229,93 @@ class ParametrizacaoPersistencia {
         $this->getConexao()->query($sSql);
 
         $this->getConexao()->fechaConexao();
+    }
+
+    public function buscaUsuario(){
+        $this->getConexao()->conectaBanco();
+
+        $usuario = intval($this->getModel()->getUsuario());
+
+        $sSql = "SELECT con.cdConstante idSituacao
+                       ,con.dsConstante dsSituacao
+                       ,usu.cdUsuario cdUsuario
+                       ,concat(dsNome, ' ', dsSobrenome) dsNome
+                       ,per.cdPerfil cdPerfil
+                       ,per.dsPerfil dsPerfil
+                  FROM tbusuario usu
+                  JOIN tbconstante con
+                    ON con.vlConstante = usu.idSituacao
+                   AND con.idConstante = 'SITUACAO_ATIVO_INATIVO'
+                  JOIN tbPerfil per
+                    ON per.cdPerfil = usu.cdPerfil
+                 WHERE usu.cdUsuario = " . $usuario;
+
+        $resultado = mysql_query($sSql);
+
+        $qtdLinhas = mysql_num_rows($resultado);
+
+        $contador = 0;
+
+        $retorno = '[';
+        while ($linha = mysql_fetch_assoc($resultado)) {
+
+            $contador = $contador + 1;
+
+            $retorno = $retorno . '{"cdUsuario": "'.$linha["cdUsuario"].'"
+                                    , "dsNome" : "'.$linha["dsNome"].'"
+                                   , "cdPerfil" : "'.$linha["cdPerfil"].'"
+                                   , "dsPerfil" : "'.$linha["dsPerfil"].'"
+                                   , "dsSituacao" : "'.$linha["dsSituacao"].'"
+                                   , "idSituacao" : "'.$linha["idSituacao"].'"}';
+            //Para não concatenar a virgula no final do json
+            if($qtdLinhas != $contador)
+                $retorno = $retorno . ',';
+
+        }
+        $retorno = $retorno . "]";
+
+        $this->getConexao()->fechaConexao();
+
+        return $retorno;
+
+    }
+
+    function buscaEmpresa(){
+      $this->getConexao()->conectaBanco();
+
+      $empresa = intval($this->getModel()->getEmpresa());
+
+      $sSql = "SELECT nmEmpresa nmEmpresa
+                  	 ,hrInicial hrInicial
+                		 ,hrFinal   hrFinal
+                 FROM tbEmpresa emp
+                WHERE emp.cdEmpresa = " . $empresa;
+
+      $resultado = mysql_query($sSql);
+
+      $qtdLinhas = mysql_num_rows($resultado);
+
+      $contador = 0;
+
+      $retorno = '[';
+      while ($linha = mysql_fetch_assoc($resultado)) {
+
+          $contador = $contador + 1;
+
+          $retorno = $retorno . '{"nmEmpresa": "'.$linha["nmEmpresa"].'"
+                                  , "hrInicial" : "'.$linha["hrInicial"].'"
+                                 , "hrFinal" : "'.$linha["hrFinal"].'"}';
+          //Para não concatenar a virgula no final do json
+          if($qtdLinhas != $contador)
+              $retorno = $retorno . ',';
+
+      }
+      $retorno = $retorno . "]";
+
+      $this->getConexao()->fechaConexao();
+
+      return $retorno;
+
     }
 
 }

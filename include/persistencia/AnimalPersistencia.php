@@ -193,53 +193,40 @@ class AnimalPersistencia {
         $usuario = intval($this->getModel()->getUsuario());
         $codigo = intval($this->getModel()->getCodigo());
 
-        $sSql = "DELETE
-                   FROM tbanimal
-                  WHERE cdanimal = " . $codigo ."
-                    AND cdUsuario = " . $usuario;
 
-        $this->getConexao()->query($sSql);
+        $retorno = $this->ValidaExclusao($usuario, $codigo);
+        
+        if($retorno == 'N'){
+          $sSql = "DELETE
+                     FROM tbanimal
+                    WHERE cdanimal = " . $codigo ."
+                      AND cdUsuario = " . $usuario;
+
+          $this->getConexao()->query($sSql);
+
+          echo '[{"mensagem": "Agendamento excluido com sucesso!"}]';
+        }
+        else{
+          echo '[{"mensagem": "Não é possível excluir este animal pois está vinculado a um agendamento!"}]';
+
+        }
+
 
         $this->getConexao()->fechaConexao();
     }
 
-    public function ValidaExclusao(){
-        $this->getConexao()->conectaBanco();
-
-        $usuario = intval($this->getModel()->getUsuario());
-        $codigo = intval($this->getModel()->getCodigo());
+    public function ValidaExclusao($codigo, $usuario){
 
         $sSql = "SELECT 'S' idExclusao
                    FROM tbagendamento age
                   WHERE age.cdAnimal = " . $codigo ."
                     AND age.cdUsuario = " . $usuario;
 
-        $resultado = mysql_query($sSql);
 
-        $qtdLinhas = mysql_num_rows($resultado);
-
-        $contador = 0;
-
-        $retorno = '[';
-        while ($linha = mysql_fetch_assoc($resultado)) {
-
-            $contador = $contador + 1;
-
-            $retorno = $retorno . '{"idExclusao": "'.$linha["idExclusao"].'"}';
-            //Para não concatenar a virgula no final do json
-            if($qtdLinhas != $contador)
-                $retorno = $retorno . ',';
-
-        }
-        $retorno = $retorno . "]";
-
-        //Não retornou nada so select
-        if ($contador == 0)
-            $retorno = '[{"idExclusao": "N"}]';
-
-        $this->getConexao()->fechaConexao();
-
-        return $retorno;
+        if($oDados = $this->getConexao()->fetch_query($sSql))
+            return $oDados->idExclusao;
+        else
+            return  "N";
 
     }
 }

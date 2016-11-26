@@ -13,19 +13,19 @@
                 <div class="form-group">
                     <label for="nome" class="col-md-1 control-label">Nome</label>
                     <div class="col-md-4">
-                        <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome"></input>
+                        <input id="txbNome" type="text" class="form-control" name="txbNome" placeholder="Nome" maxlength="50"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="raca" class="col-md-1 control-label">Raça</label>
                     <div class="col-md-4">
-                        <input id="txbRaca" type="text" class="form-control" name="txbRaca" placeholder="Raça"></input>
+                        <input id="txbRaca" type="text" class="form-control" name="txbRaca" placeholder="Raça" maxlength="50"></input>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="idade" class="col-md-1 control-label">Idade</label>
                     <div class="col-md-4">
-                        <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade"></input>
+                        <input id="txbIdade" type="text" class="form-control" name="txbIdade" placeholder="Idade" maxlength="2"></input>
                     </div>
                 </div>
 
