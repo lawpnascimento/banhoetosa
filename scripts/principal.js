@@ -1,13 +1,29 @@
 var grid = "";
 
 $(document).ready(function(){
-  $('input[type="date"]').change(function(){
+  var now = new Date();
+  var day = ("0" + now.getDate()).slice(-2);
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
+  var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+  $('input[type="date"]').val(today);
+
+  buscaHorario();
+
+  $('input[type="date"]').change(function(){
+    buscaHorario();
+
+
+  });
+
+  function buscaHorario(){
     $.ajax({
         //Tipo de envio POST ou GET
         type: "POST",
         dataType: "text",
         data: {
+            data: $('input[type="date"]').val(),
             action: "buscahoraparametrizada"
         },
 
@@ -15,59 +31,8 @@ $(document).ready(function(){
 
         //Se der tudo ok no envio...
         success: function (dados) {
-            var json = $.parseJSON(dados);
-            var hrInicial = 0;
-            var hrFinal = 0;
+          $("#grdPrincipal").html(dados);
 
-            for (var i = 0; i < json.length; i++) {
-
-                var parametrizacao = json[i];
-                hrInicial = parametrizacao.hrInicial;
-                hrFinal   = parametrizacao.hrFinal;
-
-            }
-
-
-            //Busca a hora inicial e a hora final parametrizada e faz um loop
-            for (var j = hrInicial; j <= parseInt(hrFinal) - 1; j++){
-                validaHorarioAgendamento(j, parseInt(j) + 1, $('input[type="date"]').val());
-            }
-
-
-        }
-
-    });
-
-  });
-
-  function validaHorarioAgendamento(horarioDe, horarioAte, data){
-    $.ajax({
-        //Tipo de envio POST ou GET
-        type: "POST",
-        dataType: "text",
-        data: {
-            data: data,
-            horarioDe: horarioDe,
-            horarioAte: horarioAte,
-            action: "validahorarioagendamento"
-        },
-
-        url: "../controller/PrincipalController.php",
-
-        //Se der tudo ok no envio...
-        success: function (dados) {
-          if(dados == 1){
-              grid = grid + "<tr style='background-color:red'>";
-              grid = grid + "<td>" + horarioDe + "</td>";
-              grid = grid + "</tr>";
-          }
-          else if(dados == 2){
-              grid = grid + "<tr style='background-color:green'>";
-              grid = grid + "<td>" + horarioDe + "</td>";
-              grid = grid + "</tr>";
-          }
-
-          $("#grdPrincipal").html(grid);
         }
 
     });

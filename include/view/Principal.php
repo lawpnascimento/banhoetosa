@@ -110,6 +110,20 @@
 								<tr>
 									<th>
 										Horário
+									<th>
+										Cliente
+									</th>
+									<th>
+										Animal
+									</th>
+									<th>
+										Raça
+									</th>
+									<th>
+										Porte
+									</th>
+									<th>
+										Telefone
 									</th>
 								</tr>
 							</thead>

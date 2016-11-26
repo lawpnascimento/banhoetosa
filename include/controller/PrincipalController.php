@@ -12,8 +12,6 @@ require_once("../../estrutura/iniciar_sessao.php");
 
 switch($_POST["action"]){
 
-
-
     case 'buscar':
       $oModel = new PrincipalModel();
 
@@ -29,7 +27,13 @@ switch($_POST["action"]){
 
       break;
    case 'buscahoraparametrizada':
+      $oModel = new PrincipalModel();
+
       $oPersistencia = new PrincipalPersistencia();
+
+      $oModel->setData($_POST["data"]);
+
+      $oPersistencia->setModel($oModel);
 
       $retorno = $oPersistencia->buscaHoraParametrizada();
 
