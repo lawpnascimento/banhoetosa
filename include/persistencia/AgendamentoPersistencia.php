@@ -51,7 +51,7 @@ class AgendamentoPersistencia {
 
           $this->getConexao()->query($sSql);
 
-          /*$this->enviaEmailAtendente(ucfirst($_SESSION["nome"]) . " " . ucfirst($_SESSION["dssobrenome"]), $data, $horarioDe, $horarioAte);*/
+          $this->enviaEmailAtendente(ucfirst($_SESSION["nome"]) . " " . ucfirst($_SESSION["dssobrenome"]), $data, $horarioDe, $horarioAte);
           $this->getConexao()->fechaConexao();
 
           return $agendamentoValido;
@@ -342,7 +342,7 @@ class AgendamentoPersistencia {
 
       $sSql = "SELECT dsEmail
                  FROM tbusuario usu
-                WHERE usu.cdPerfil = 2";
+                WHERE usu.cdPerfil IN (2,3)";
 
       $resultado = mysql_query($sSql);
 

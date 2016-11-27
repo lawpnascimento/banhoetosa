@@ -36,6 +36,7 @@ switch($_POST["action"]){
           echo '{ "mensagem": "Já existe agendamento para o período informado", "status" : "3" }';
         elseif($AgendamentoValido == 4)
           echo '{ "mensagem": "Já existe uma solicitação de agendamento pendente para o animal informado", "status": "4" }';
+
         break;
 
     case 'buscar':
@@ -50,7 +51,7 @@ switch($_POST["action"]){
         $oModel->setAnimal($_POST["animal"]);
         $oModel->setData($_POST["data"]);
         $oModel->setUsuario($_SESSION["cdusuario"]);
-  
+
         if(isset($_POST["codigo"])){
             $oModel->setCodigo($_POST["codigo"]);
         }

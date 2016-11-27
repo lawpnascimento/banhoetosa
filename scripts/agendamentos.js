@@ -69,7 +69,7 @@ function buscaAgendamentos(cdAgendamento){
         }
     });
 
-};
+}
 
 function buscaAnimaisDropDown(){
 
