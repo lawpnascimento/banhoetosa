@@ -1,20 +1,9 @@
 function buscaAgendamentos(cdAgendamento){
-    var ddlHorarioDe = null;
-    var ddlHorarioAte = null;
-    var ddlAnimal = null;
-
     var txbData = $("#dtpAgendamento").val();
-
-    if($("#ddlHorarioDe").text().trim() != $("#ddlHorarioDe").attr("name")){
-        ddlHorarioDe = $("#ddlHorarioDe").text();
-    }
-
-    if($("#ddlHorarioAte").text().trim() != $("#ddlHorarioAte").attr("name")){
-       ddlHorarioAte = $("#ddlHorarioAte").text();
-    }
-    if($("#ddlAnimal").text().trim() != $("#ddlAnimal").attr("name")){
-        ddlAnimal = $("#ddlAnimal").val();
-    }
+    var txbHorarioDe = $("#txbHorarioDe").val();
+    var txbHorarioAte = $("#txbHorarioAte").val();
+    var ddlTipoPagamento = $("#ddlPagamento").val();
+    var ddlAnimal = $("#ddlAnimal").val();
 
     $.ajax({
         //Tipo de envio POST ou GET
@@ -23,8 +12,9 @@ function buscaAgendamentos(cdAgendamento){
         data: {
             codigo: cdAgendamento,
             data: txbData,
-            horarioDe: ddlHorarioDe,
-            horarioAte: ddlHorarioAte,
+            horarioDe: txbHorarioDe,
+            horarioAte: txbHorarioAte,
+            tipoPagamento: ddlTipoPagamento,
             animal: ddlAnimal,
             action: "buscar"
         },
@@ -47,6 +37,7 @@ function buscaAgendamentos(cdAgendamento){
                     grid = grid + "<td>" + agendamento.hrInicial + "</td>";
                     grid = grid + "<td>" + agendamento.hrFinal + "</td>";
                     grid = grid + "<td>" + agendamento.nmAnimal + "</td>";
+                    grid = grid + "<td>" + agendamento.dsPagamento + "</td>";
                     grid = grid + "<td>" + agendamento.dsSituacao + "</td>";
                     grid = grid + "<td href='javascript:void(0);' onClick='buscaAgendamentos(" + agendamento.cdAgendamento + ")'><a>Editar</a></td>";
                     grid = grid + "</tr>";
@@ -64,12 +55,14 @@ function buscaAgendamentos(cdAgendamento){
                     //please put attention to the month (parts[0]), Javascript counts months from 0:
                     // January - 0, February - 1, etc
                     var data = partes[2] + "-" + partes[1] + "-" + partes[0];
-                    
+
                     $("#dtpAgendamento").val(data);
-                    $("#ddlHorarioDe:first-child").text(agendamento.hrInicial);
-                    $("#ddlHorarioAte:first-child").text(agendamento.hrFinal);
+                    $("#txbHorarioDe").val(agendamento.hrInicial);
+                    $("#txbHorarioAte").val(agendamento.hrFinal);
                     $("#ddlAnimal:first-child").text(agendamento.nmAnimal);
                     $("#ddlAnimal:first-child").val(agendamento.cdAnimal);
+                    $("#ddlPagamento:first-child").val(agendamento.cdPagamento);
+                    $("#ddlPagamento:first-child").text(agendamento.dsPagamento);
                     $("#hdfcdAgendamento").val(agendamento.cdAgendamento);
                 }
             }
@@ -121,16 +114,61 @@ function buscaAnimaisDropDown(){
     });
 }
 
+function buscaTipoPagamentoDropDown(){
+
+    $.ajax({
+        //Tipo de envio POST ou GET
+        type: "POST",
+        dataType: "text",
+        data: {
+            action: "tipopagamentodropdown"
+        },
+
+        url: "../controller/AgendamentoController.php",
+
+        //Se der tudo ok no envio...
+        success: function (dados) {
+            var json = $.parseJSON(dados);
+
+            var dropdown = "";
+            for (var i = 0; i < json.length; i++) {
+
+                var tipoPagamento = json[i];
+
+                dropdown = dropdown + '<li role="presentation" value="' + tipoPagamento.cdPagamento  + '"><a role="menuitem" tabindex="-1" href="#">' + tipoPagamento.dsPagamento + '</a></li>';
+
+            }
+            $("#ulPagamento").html(dropdown);
+
+            $("#ulPagamento li a").click(function(){
+
+                $("#ddlPagamento:first-child").text($(this).text());
+
+                $("#ulPagamento li").each(function(){
+
+                    if ($(this).text() == $("#ddlPagamento").text().trim()){
+                        $("#ddlPagamento").val($(this).val());
+                    }
+                });
+
+            });
+        }
+
+    });
+}
+
 $("#document").ready(function() {
+     $('#txbHorarioDe').mask('00:00:00');
+     $('#txbHorarioAte').mask('00:00:00');
     $("#agendamentosform #btnCadastrar").click(function () {
 
         var txbData = $("#dtpAgendamento").val();
-        var ddlHorarioDe = $("#ddlHorarioDe").text().trim();
-        var ddlHorarioAte = $("#ddlHorarioAte").text().trim();
+        var txbHorarioDe = $("#txbHorarioDe").val();
+        var txbHorarioAte = $("#txbHorarioAte").val();
         var ddlTipoPagamento = $("#ddlPagamento").val();
         var ddlAnimal = $("#ddlAnimal").val();
 
-        if(validaCampos(txbData, ddlHorarioDe,ddlHorarioAte,ddlAnimal) != ""){
+        if(validaCampos(txbData, txbHorarioDe,txbHorarioAte,ddlAnimal) != ""){
             jbkrAlert.alerta('Alerta!',msgErro);
         }
         else{
@@ -140,8 +178,8 @@ $("#document").ready(function() {
                 dataType: "text",
                 data: {
                     data: txbData,
-                    horarioDe: ddlHorarioDe,
-                    horarioAte: ddlHorarioAte,
+                    horarioDe: txbHorarioDe,
+                    horarioAte: txbHorarioAte,
                     tipoPagamento: ddlTipoPagamento,
                     animal: ddlAnimal,
                     action: "cadastrar"
@@ -181,13 +219,13 @@ $("#document").ready(function() {
     $("#agendamentosform #btnAtualizar").click(function () {
 
         var txbData = $("#dtpAgendamento").val();
-        var ddlHorarioDe = $("#ddlHorarioDe").text();
-        var ddlHorarioAte = $("#ddlHorarioAte").text();
+        var txbHorarioDe = $("#txbHorarioDe").val();
+        var txbHorarioAte = $("#txbHorarioAte").val();
         var ddlTipoPagamento = $("#ddlPagamento").val();
         var ddlAnimal = $("#ddlAnimal").val();
         var cdAgendamento = $("#hdfcdAgendamento").val();
 
-        if(validaCampos(txbData, ddlHorarioDe,ddlHorarioAte,ddlAnimal) != ""){
+        if(validaCampos(txbData, txbHorarioDe,txbHorarioAte,ddlAnimal) != ""){
             jbkrAlert.alerta('Alerta!',msgErro);
         }
         else{
@@ -197,8 +235,8 @@ $("#document").ready(function() {
                 dataType: "text",
                 data: {
                     data: txbData,
-                    horarioDe: ddlHorarioDe,
-                    horarioAte: ddlHorarioAte,
+                    horarioDe: txbHorarioDe,
+                    horarioAte: txbHorarioAte,
                     tipoPagamento: ddlTipoPagamento,
                     animal: ddlAnimal,
                     codigo: cdAgendamento,
@@ -268,28 +306,6 @@ $("#document").ready(function() {
             });
 
         });
-    });
-
-    $("#ulHorarioDe li a").click(function(){
-        if($("#ddlHorarioAte:first-child").text() <= $(this).text() && $("#ddlHorarioDe:first-child").text().trim() != "De"){
-            jbkrAlert.alerta("Alerta", "Data 'De' deve ser maior que 'Até'");
-        }
-        else{
-            $("#ddlHorarioDe:first-child").text($(this).text());
-        }
-
-
-    });
-
-    $("#ulHorarioAte li a").click(function(){
-
-        if($("#ddlHorarioDe:first-child").text() >= $(this).text() && $("#ddlHorarioAte:first-child").text().trim() != "Até"){
-            jbkrAlert.alerta("Alerta", "Data 'De' deve ser maior que 'Até'");
-        }
-        else{
-            $("#ddlHorarioAte:first-child").text($(this).text());
-        }
-
     });
 
     $("#ulPagamento li a").click(function(){

@@ -34,13 +34,15 @@ class AgendamentoPersistencia {
 
           $horarioDe = date("H:i", strtotime($this->getModel()->getHorarioDe()));
           $horarioAte = date("H:i", strtotime($this->getModel()->getHorarioAte()));
+          $tipoPagamento = intval($this->getModel()->getTipoPagamento());
           $animal = intval($this->getModel()->getAnimal());
           $data = date("d/m/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
           $usuario = intval($this->getModel()->getUsuario());
 
-          $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdAnimal, dtAgendamento, cdSituacao, cdUsuario,cdEmpresa)
-                            VALUES ('". $horarioDe ."'
-                                  ,'". $horarioAte ."'
+          $sSql = "INSERT INTO tbagendamento (hrInicial, hrFinal, cdPagamento, cdAnimal, dtAgendamento, cdSituacao, cdUsuario,cdEmpresa)
+                            VALUES (concat(hour('". $horarioDe ."'),':00:00')
+                                  ,concat(hour('". $horarioAte ."'),':00:00')
+                                  , ". $tipoPagamento ."
                                   , ". $animal ."
                                   , STR_TO_DATE('". $data ."','%d/%m/%Y')
                                   , 1
@@ -68,6 +70,7 @@ class AgendamentoPersistencia {
         $data = $this->getModel()->getData();
         $horarioDe = $this->getModel()->getHorarioDe() ;
         $horarioAte = $this->getModel()->getHorarioAte();
+        $tipoPagamento = intval($this->getModel()->getTipoPagamento());
         $animal = $this->getModel()->getAnimal();
 
         if($codigo == null){
@@ -81,6 +84,8 @@ class AgendamentoPersistencia {
                            ,ani.cdAnimal cdAnimal
                            ,sit.cdSituacao cdSituacao
                            ,sit.dsSituacao dsSituacao
+                           ,pag.cdPagamento cdPagamento
+                           ,pag.dsPagamento dsPagamento
                        FROM tbagendamento age
                        JOIN tbusuario usu
                          ON usu.cdUsuario = age.cdUsuario
@@ -88,6 +93,8 @@ class AgendamentoPersistencia {
                          ON ani.cdAnimal = age.cdAnimal
                        JOIN tbsituacaoagendamento sit
                          ON sit.cdSituacao = age.cdSituacao
+                       JOIN tbtipopagamento pag
+                         ON pag.cdPagamento = age.cdPagamento
                       WHERE age.cdUsuario = " .$usuario;
 
             if($data != null){
@@ -103,10 +110,15 @@ class AgendamentoPersistencia {
             }
 
             if($animal != null){
-                $sSql = $sSql . " AND age.cdAnimal = ". intval($animal) ."";
+                $sSql = $sSql . " AND age.cdAnimal = ". intval($animal);
+            }
+
+            if($tipoPagamento != null){
+                $sSql = $sSql . " AND age.cdPagamento = ". intval($tipoPagamento);
             }
 
             $sSql = $sSql . " ORDER BY age.cdAgendamento";
+
         }
         else{
             $sSql = "SELECT age.cdAgendamento cdAgendamento
@@ -119,6 +131,8 @@ class AgendamentoPersistencia {
                            ,ani.cdAnimal cdAnimal
                            ,sit.cdSituacao cdSituacao
                            ,sit.dsSituacao dsSituacao
+                           ,pag.cdPagamento cdPagamento
+                           ,pag.dsPagamento dsPagamento
                        FROM tbagendamento age
                        JOIN tbusuario usu
                          ON usu.cdUsuario = age.cdUsuario
@@ -126,6 +140,8 @@ class AgendamentoPersistencia {
                          ON ani.cdAnimal = age.cdAnimal
                        JOIN tbsituacaoagendamento sit
                          ON sit.cdSituacao = age.cdSituacao
+                       JOIN tbtipopagamento pag
+                         ON pag.cdPagamento = age.cdPagamento
                       WHERE age.cdUsuario = " .$usuario."
                         AND age.cdAgendamento = " . $codigo."
                         ORDER BY cdAgendamento";
@@ -146,8 +162,10 @@ class AgendamentoPersistencia {
             $retorno = $retorno . '{"dtAgendamento": "'.date_format($date, 'd/m/Y').'"
                                    , "hrInicial" : "'.$linha["hrInicial"].'"
                                    , "hrFinal" : "'.$linha["hrFinal"].'"
+                                   , "cdPagamento" : "'.$linha["cdPagamento"].'"
                                    , "nmAnimal" : "'.$linha["nmAnimal"].'"
-                                   , "cdAgendamento" : "'.$linha["cdAgendamento"].'"
+                                  , "cdAgendamento" : "'.$linha["cdAgendamento"].'"
+                                   , "dsPagamento" : "'.$linha["dsPagamento"].'"
                                    , "dsSituacao" : "'.$linha["dsSituacao"].'"
                                    , "cdSituacao" : "'.$linha["cdSituacao"].'"
                                    , "cdAnimal" : "'.$linha["cdAnimal"].'"}';
@@ -170,6 +188,7 @@ class AgendamentoPersistencia {
 
         $horarioDe = date("h:i", strtotime($this->getModel()->getHorarioDe()));
         $horarioAte = date("h:i", strtotime($this->getModel()->getHorarioAte()));
+        $tipoPagamento = intval($this->getModel()->getTipoPagamento());
         $animal = intval($this->getModel()->getAnimal());
         $data = date("m/d/y",strtotime(str_replace('/','-',$this->getModel()->getData())));
         $usuario = intval($this->getModel()->getUsuario());
@@ -177,8 +196,9 @@ class AgendamentoPersistencia {
 
         $sSql = "UPDATE tbagendamento age
                     SET age.cdAnimal = " . $animal ."
-                       ,age.hrInicial = '" . $horarioDe ."'
-                       ,age.hrFinal = '" . $horarioAte ."'
+                       ,age.cdPagamento = " . $tipoPagamento ."
+                       ,age.hrInicial = concat(hour('" . $horarioDe ."'),':00:00')
+                       ,age.hrFinal = concat(hour('" . $horarioAte ."'),':00:00')
                        ,age.dtAgendamento = STR_TO_DATE('". $data ."','%m/%d/%Y')
                   WHERE age.cdAgendamento = " . $codigo ."
                     AND age.cdUsuario = " . $usuario;
@@ -229,6 +249,38 @@ class AgendamentoPersistencia {
 
             $retorno = $retorno . '{"cdAnimal": "'.$linha["cdAnimal"].'"
                                    , "dsNome" : "'.$linha["dsNome"].'"}';
+            //Para não concatenar a virgula no final do json
+            if($qtdLinhas != $contador)
+               $retorno = $retorno . ',';
+
+        }
+        $retorno = $retorno . "]";
+
+        $this->getConexao()->fechaConexao();
+
+        return $retorno;
+    }
+
+    public function buscaTipoPagamentoDropDown(){
+        $this->getConexao()->conectaBanco();
+
+        $sSql = "SELECT pag.cdPagamento cdPagamento
+                       ,pag.dsPagamento dsPagamento
+                   FROM tbtipopagamento pag";
+
+        $resultado = mysql_query($sSql);
+
+        $qtdLinhas = mysql_num_rows($resultado);
+
+        $contador = 0;
+
+        $retorno = '[';
+        while ($linha = mysql_fetch_assoc($resultado)) {
+
+            $contador = $contador + 1;
+
+            $retorno = $retorno . '{"cdPagamento": "'.$linha["cdPagamento"].'"
+                                   , "dsPagamento" : "'.$linha["dsPagamento"].'"}';
             //Para não concatenar a virgula no final do json
             if($qtdLinhas != $contador)
                $retorno = $retorno . ',';
