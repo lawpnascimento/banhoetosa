@@ -63,7 +63,7 @@ class PrincipalPersistencia {
                  $grid .=   "</tr>";
                }
                else {
-                 $grid .=  "<tr style='background-color:rgba(128, 255, 128,0.25)'>";
+                 $grid .=  "<tr style='background-color:rgba(166, 166, 166,0.25)'>";
                  $grid .=   "<td>" . $i . ":00</td>";
                  $grid .=   "<td></td>";
                  $grid .=   "<td></td>";

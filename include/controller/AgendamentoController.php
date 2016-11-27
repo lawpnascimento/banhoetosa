@@ -35,7 +35,7 @@ switch($_POST["action"]){
         elseif($AgendamentoValido == 3)
           echo '{ "mensagem": "Já existe agendamento para o período informado", "status" : "3" }';
         elseif($AgendamentoValido == 4)
-          echo '{ "mensagem": "Já existe uma solicitação de agendamento pendente para o animal informado", "status": "4" }';
+          echo '{ "mensagem": "Já existe uma solicitação de agendamento pendente para o animal", "status": "4" }';
 
         break;
 
