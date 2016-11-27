@@ -7,6 +7,12 @@ $("#document").ready(function(){
 });
 
 
+$("#parametrizacaoForm #btnCancelar").click(function () {
+  buscaUsuario();
+  buscaUsuario();
+
+});
+
 
 $("#parametrizacaoForm #btnAtualizar").click(function () {
     var txbEmpresa = $("#txbEmpresa").val();
