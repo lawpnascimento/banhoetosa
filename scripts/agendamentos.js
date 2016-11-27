@@ -327,10 +327,10 @@ function validaCampos(data, horarioDe, horarioAte, animal){
     if(data == ""){
         msgErro = msgErro + "<b>Data</b> é um campo de preenchimento obrigatório";
     }
-    if(horarioDe.trim() == "De"){
+    if(horarioDe == ""){
         msgErro = msgErro + "</br><b>Horário De</b> é um campo de preenchimento obrigatório";
     }
-    if(horarioAte.trim() == "Até"){
+    if(horarioAte == ""){
         msgErro = msgErro + "</br><b>Horário Até</b> é um campo de preenchimento obrigatório";
     }
     if(animal == ""){

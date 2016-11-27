@@ -9,3 +9,7 @@ INSERT INTO tbsituacaoagendamento (cdSituacao, dsSituacao) VALUES (3, 'Aprovado'
 INSERT INTO tbperfil (cdPerfil, dsPerfil) VALUES (1, 'Cliente');
 INSERT INTO tbperfil (cdPerfil, dsPerfil) VALUES (2, 'Atendente');
 INSERT INTO tbperfil (cdPerfil, dsPerfil) VALUES (3, 'Administrador');
+
+INSERT INTO tbtipopagamento (cdPagamento, dsPagamento) values (1, 'Dinheiro');
+INSERT INTO tbtipopagamento (cdPagamento, dsPagamento) values (2, 'Cartao de credito');
+INSERT INTO tbtipopagamento (cdPagamento, dsPagamento) values (3, 'Cheque');

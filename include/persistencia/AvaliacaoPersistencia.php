@@ -40,8 +40,7 @@ class AvaliacaoPersistencia {
                      ON usu.cdUsuario = age.cdUsuario
                    JOIN tbanimal ani
                      ON ani.cdAnimal = age.cdAnimal
-                  WHERE age.cdUsuario = " .$usuario."
-                    AND age.cdSituacao = 1
+                  WHERE age.cdSituacao = 1
                     ORDER BY cdAgendamento";
 
         $resultado = mysql_query($sSql);
@@ -77,13 +76,11 @@ class AvaliacaoPersistencia {
   public function AprovarAgendamento(){
       $this->getConexao()->conectaBanco();
 
-      $usuario = intval($this->getModel()->getUsuario());
       $agendamento = intval($this->getModel()->getAgendamento());
 
       $sSql = "UPDATE tbagendamento age
                   SET age.cdSituacao = 3
-                WHERE age.cdAgendamento = " . $agendamento ."
-                  AND age.cdUsuario = " . $usuario;
+                WHERE age.cdAgendamento = " . $agendamento;
 
       $this->getConexao()->query($sSql);
 
@@ -93,13 +90,11 @@ class AvaliacaoPersistencia {
   public function ReprovarAgendamento(){
       $this->getConexao()->conectaBanco();
 
-      $usuario = intval($this->getModel()->getUsuario());
       $agendamento = intval($this->getModel()->getAgendamento());
 
       $sSql = "UPDATE tbagendamento age
                   SET age.cdSituacao = 2
-                WHERE age.cdAgendamento = " . $agendamento ."
-                  AND age.cdUsuario = " . $usuario;
+                WHERE age.cdAgendamento = " . $agendamento;
 
       $this->getConexao()->query($sSql);
 
