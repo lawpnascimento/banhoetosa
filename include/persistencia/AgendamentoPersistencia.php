@@ -49,7 +49,7 @@ class AgendamentoPersistencia {
 
           $this->getConexao()->query($sSql);
 
-          $this->enviaEmailAtendente(ucfirst($_SESSION["nome"]) . " " . ucfirst($_SESSION["dssobrenome"]), $data, $horarioDe, $horarioAte);
+          /*$this->enviaEmailAtendente(ucfirst($_SESSION["nome"]) . " " . ucfirst($_SESSION["dssobrenome"]), $data, $horarioDe, $horarioAte);*/
           $this->getConexao()->fechaConexao();
 
           return $agendamentoValido;

@@ -60,7 +60,12 @@ function buscaAgendamentos(cdAgendamento){
                 for (var i = 0; i < json.length; i++) {
                     var agendamento = json[i];
 
-                    $("#dtpAgendamento").val(agendamento.dtAgendamento);
+                    var partes = agendamento.dtAgendamento.split('/');
+                    //please put attention to the month (parts[0]), Javascript counts months from 0:
+                    // January - 0, February - 1, etc
+                    var data = partes[2] + "-" + partes[1] + "-" + partes[0];
+                    
+                    $("#dtpAgendamento").val(data);
                     $("#ddlHorarioDe:first-child").text(agendamento.hrInicial);
                     $("#ddlHorarioAte:first-child").text(agendamento.hrFinal);
                     $("#ddlAnimal:first-child").text(agendamento.nmAnimal);
@@ -263,10 +268,6 @@ $("#document").ready(function() {
             });
 
         });
-    });
-
-    $(function () {
-        $('.datepicker').datepicker();
     });
 
     $("#ulHorarioDe li a").click(function(){

@@ -14,14 +14,10 @@
                     <input type="hidden" id="hdfcdAgendamento">
                     <label for="data" class="col-md-1 control-label">Data</label>
                     <div class="col-md-4">
-                        <div class="input-group date" id="divDtpAgendamento">
-                            <input id="dtpAgendamento" readonly="true" type="text" class=" datepicker form-control" data-date-format="dd/mm/yyyy" maxlength="10" />
-                                <span class="input-group-addon">
-                                    <span class=" glyphicon glyphicon-calendar"></span>
-                                </span>
+                        <div  id="divDtpAgendamento">
+                            <input id="dtpAgendamento" type="date" data-date-format="DD/MM/YYYY" class="form-control"  maxlength="10" />
                         </div>
                     </div>
-
                 </div>
                 <div class="form-group">
                     <label for="horario" class="col-md-1 control-label">Horário</label>

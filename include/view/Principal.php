@@ -11,7 +11,7 @@
     <link href="../../css/datepicker.css" rel="stylesheet" media="screen" />
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
-		<script type="text/javascript" src="../../scripts/bootstrap-datepicker.js"></script>
+		
     <script type="text/javascript" src="../../scripts/fileinput.js"></script>
     <script type="text/javascript" src="../../scripts/fileinput_locale_pt-BR.js"></script>
     <link href="../../css/fileinput.css" rel="stylesheet" media="screen" />
