@@ -1,3 +1,13 @@
+$("#document").ready(function(){
+  $('#txbHorarioDe').mask('00:00:00');
+  $('#txbHorarioAte').mask('00:00:00');
+
+
+
+});
+
+
+
 $("#parametrizacaoForm #btnAtualizar").click(function () {
     var txbEmpresa = $("#txbEmpresa").val();
     var ddlUsuario = $("#ddlUsuario").val();
@@ -233,8 +243,6 @@ function buscaSituacaoDropdownUsuario(usuario){
 
     });
 }
-
-
 
 /*Função deve ser chamada dentro da função que carrega a dropdown assim é possível realizar um onclick dos itens da dropdown*/
 function cliqueDropDownUsuarios(){

@@ -53,7 +53,7 @@ class PrincipalPersistencia {
           $arr = json_decode($retorno, true);
           if($arr[0]['idReservado'] == 1){
                if ($_SESSION["cdperfil"] <> 1){
-                 $grid .=  "<tr style='background-color:rgb(166, 166, 166)'>";
+                 $grid .=  "<tr style='background-color:rgba(166, 166, 166,0.25)'>";
                  $grid .=   "<td>" . $i . ":00</td>";
                  $grid .=   "<td>" . $arr[0]['dsNome'] . "</td>";
                  $grid .=   "<td>" . $arr[0]['nmAnimal'] . "</td>";
@@ -63,7 +63,7 @@ class PrincipalPersistencia {
                  $grid .=   "</tr>";
                }
                else {
-                 $grid .=  "<tr style='background-color:rgb(128, 255, 128)'>";
+                 $grid .=  "<tr style='background-color:rgba(128, 255, 128,0.25)'>";
                  $grid .=   "<td>" . $i . ":00</td>";
                  $grid .=   "<td></td>";
                  $grid .=   "<td></td>";
@@ -74,7 +74,7 @@ class PrincipalPersistencia {
                }
 
            }else{
-               $grid .=  "<tr style='background-color:rgb(128, 255, 128)'>";
+               $grid .=  "<tr style='background-color:rgba(128, 255, 128,0.25)'>";
                $grid .=   "<td>" . $i . ":00</td>";
                $grid .=   "<td></td>";
                $grid .=   "<td></td>";
@@ -158,16 +158,7 @@ class PrincipalPersistencia {
                , "nrTelefone" : " "}]';
 
       }
-
-
-
   	}
-
-
-
 }
-
-
-
 
 ?>

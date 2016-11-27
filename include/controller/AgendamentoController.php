@@ -19,6 +19,7 @@ switch($_POST["action"]){
 
         $oModel->setHorarioDe($_POST["horarioDe"]);
         $oModel->setHorarioAte($_POST["horarioAte"]);
+        $oModel->setTipoPagamento($_POST["tipoPagamento"]);
         $oModel->setAnimal($_POST["animal"]);
         $oModel->setData($_POST["data"]);
         $oModel->setUsuario($_SESSION["cdusuario"]);
@@ -45,10 +46,11 @@ switch($_POST["action"]){
 
         $oModel->setHorarioDe($_POST["horarioDe"]);
         $oModel->setHorarioAte($_POST["horarioAte"]);
+        $oModel->setTipoPagamento($_POST["tipoPagamento"]);
         $oModel->setAnimal($_POST["animal"]);
         $oModel->setData($_POST["data"]);
         $oModel->setUsuario($_SESSION["cdusuario"]);
-
+  
         if(isset($_POST["codigo"])){
             $oModel->setCodigo($_POST["codigo"]);
         }
@@ -68,6 +70,7 @@ switch($_POST["action"]){
 
         $oModel->setHorarioDe($_POST["horarioDe"]);
         $oModel->setHorarioAte($_POST["horarioAte"]);
+        $oModel->setTipoPagamento($_POST["tipoPagamento"]);
         $oModel->setAnimal($_POST["animal"]);
         $oModel->setData($_POST["data"]);
         $oModel->setUsuario($_SESSION["cdusuario"]);
@@ -107,6 +110,15 @@ switch($_POST["action"]){
         echo $retorno;
 
         break;
+    case 'tipopagamentodropdown':
 
-}
+        $oPersistencia = new AgendamentoPersistencia();
+
+        $retorno = $oPersistencia->buscaTipoPagamentoDropDown();
+
+        echo $retorno;
+
+        break;
+
+    }
 ?>

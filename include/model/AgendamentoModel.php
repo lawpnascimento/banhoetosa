@@ -6,6 +6,7 @@ class AgendamentoModel {
     private $data;
     private $horarioDe;
     private $horarioAte;
+    private $tipoPagamento;
     private $animal;
     private $usuario;
 
@@ -36,6 +37,13 @@ class AgendamentoModel {
     }
     public function getHorarioAte(){
         return $this->horarioAte;
+    }
+
+    public function setTipoPagamento($tipoPagamento){
+        $this->tipoPagamento = $tipoPagamento;
+    }
+    public function getTipoPagamento(){
+        return $this->tipoPagamento;
     }
 
     public function setAnimal($animal){

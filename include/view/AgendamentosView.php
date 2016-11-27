@@ -21,46 +21,11 @@
                 </div>
                 <div class="form-group">
                     <label for="horario" class="col-md-1 control-label">Horário</label>
-                    <div class="col-md-4">
-                        <div class="dropdown">
-                            <button  class="btn btn-default dropdown-toggle form-control" type="button" id="ddlHorarioDe" data-toggle="dropdown" aria-expanded="true" name="De">
-                                De
-                                <span class="caret"></span>
-                            </button>
-                            <ul id="ulHorarioDe" class="dropdown-menu" role="menu" aria-labelledby="ddlHorarioDe">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">08:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">09:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">10:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">11:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">12:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">14:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">16:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">17:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">18:00:00</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-md-2">
+                        <input id="txbHorarioDe" type="text" class="form-control" name="txbHorarioDe" placeholder="De"/>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="horario" class="col-md-1 control-label"></label>
-                    <div class="col-md-4">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle form-control" type="button" id="ddlHorarioAte" data-toggle="dropdown" aria-expanded="true" name="Até">
-                                Até
-                                <span class="caret"></span>
-                            </button>
-                            <ul id="ulHorarioAte" class="dropdown-menu" role="menu" aria-labelledby="ddlHorario">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">08:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">09:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">10:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">11:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">12:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">14:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">16:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">17:00:00</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">18:00:00</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-md-2">
+                        <input id="txbHorarioAte" type="text" class="form-control" name="txbHorarioAte" placeholder="Até"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,9 +37,7 @@
                                 <span class="caret"></span>
                             </button>
                             <ul id="ulPagamento" class="dropdown-menu" role="menu" aria-labelledby="ddlPagamento">
-                                <li role="presentation" value="1"><a role="menuitem" tabindex="-1" href="#">Dinheiro</a></li>
-                                <li role="presentation" value="2"><a role="menuitem" tabindex="-1" href="#">Cartão de crédito</a></li>
-                                <li role="presentation" value="3"><a role="menuitem" tabindex="-1" href="#">Cheque</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -121,6 +84,9 @@
                     </th>
                     <th>
                         Animal
+                    </th>
+                    <th>
+                        Pagamento
                     </th>
                     <th>
                         Situação

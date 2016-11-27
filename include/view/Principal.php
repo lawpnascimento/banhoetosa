@@ -8,10 +8,10 @@
 		<script type="text/javascript" src="../../scripts/jquery-2.1.4.min.js"></script>
 		<link href="../../css/bootstrap.css" rel="stylesheet" media="screen" />
 		<link href="../../css/principal.css" rel="stylesheet" media="screen" />
-    <link href="../../css/datepicker.css" rel="stylesheet" media="screen" />
+		<script type="text/javascript" src="../../scripts/jquery.mask.min.js"></script>
     <link href="../../css/alerta.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="../../scripts/bootstrap.js"></script>
-		
+
     <script type="text/javascript" src="../../scripts/fileinput.js"></script>
     <script type="text/javascript" src="../../scripts/fileinput_locale_pt-BR.js"></script>
     <link href="../../css/fileinput.css" rel="stylesheet" media="screen" />
@@ -33,12 +33,12 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
 								<li>
-									<a id="btnAnimais" href="#">Animais</a>
+									<a id="btnAgendamentos" href="#">Agendamentos</a>
 								</li>
 							</ul>
 							<ul class="nav navbar-nav">
 								<li>
-									<a id="btnAgendamentos" href="#">Agendamentos</a>
+									<a id="btnAnimais" href="#">Animais</a>
 								</li>
 							</ul>
 							<div id="divAdministradores" <?php echo $_SESSION["cdperfil"] == 1 ? "style='display:none;'" : "style='display:block;'"?>>

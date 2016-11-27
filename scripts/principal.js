@@ -67,6 +67,7 @@ $(document).ready(function(){
               $("#main").html(dados);
               buscaAgendamentos();
               buscaAnimaisDropDown();
+              buscaTipoPagamentoDropDown();
           }
       });
   });
